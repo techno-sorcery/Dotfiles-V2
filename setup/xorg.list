@@ -1,0 +1,9 @@
+xserver-xorg-core
+xserver-xorg-input-libinput
+x11-xserver-utils
+x11-xkb-utils
+x11-utils
+xinit
+xterm
+spectrwm
+compton
