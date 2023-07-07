@@ -14,3 +14,5 @@ alsa-utils
 pulseaudio
 git
 most
+htop
+conky
