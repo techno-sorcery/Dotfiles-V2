@@ -6,4 +6,4 @@ x11-utils
 xinit
 xterm
 spectrwm
-compton
+picom

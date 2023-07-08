@@ -4,4 +4,7 @@ update_interval 1.0
 total_run_times 0
 use_spacer none
 TEXT
-CPU: $cpu%, $freq MHz  |  RAM: ${mem}  |  $acpitemp°C  |  $battery_short, $battery_time  |  ${time %a, %D - %X}
+CPU: $cpu%, $freq MHz  |  RAM: ${mem}  |  $acpitemp°C, ${exec sensors | grep 'fan1:' | cut -d ':' -f 2 |
+awk '{$1=$1};1'}  |  $battery_short, ${exec upower --dump | grep "time to empty:" | 
+head -n 1 | cut -d ':' -f 2 | awk '{$1=$1};1'}  |  B: ${exec light -G | cut -d "." -f 1}%,  V: ${exec 
+amixer get Master | grep "Front Left:" | cut -d "[" -f 2 | rev | cut -c3- | rev}  |  ${time %a, %D - %X}

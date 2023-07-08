@@ -6,7 +6,7 @@ URxvt*font: xft:terminus:pixelsize=17
 URxvt.letterSpace: 1
 
 urxvt*depth: 32
-urxvt*background: rgba:0000/0000/0200/ca00
+urxvt*background: rgba:0000/0000/0000/ca00
 
 ! Colors
 *foreground: gray
