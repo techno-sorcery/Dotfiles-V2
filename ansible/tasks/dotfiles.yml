@@ -1,0 +1,59 @@
+- name: Move CLI configs
+  copy:
+    src: "../dotfiles/{{ item }}"
+    dest: "~/.dotfiles"
+  loop:
+    - htop
+    - most
+    - tmux
+    - zsh
+  tags:
+    - base
+    - config
+    - core
+    - stow
+
+- name: Stow CLI configs
+  shell: "stow -d ~/.dotfiles -v --adopt {{ item }}"
+  loop:
+    - htop
+    - most
+    - tmux
+    - zsh
+  tags:
+    - base
+    - config
+    - core
+    - stow
+
+- name: Move xorg, wm, and wm utility configs
+  copy:
+    src: "../dotfiles/{{ item }}"
+    dest: "~/.dotfiles"
+  loop:
+    - conky
+    - picom
+    - spectrwm
+    - x-windows
+  tags:
+    - base
+    - config
+    - stow
+    - xorg
+
+
+- name: Stow xorg, wm, and wm utility configs
+  shell: "stow -d ~/.dotfiles -v --adopt {{ item }}"
+  loop:
+    - conky
+    - picom
+    - spectrwm
+    - x-windows
+  tags:
+    - base
+    - config
+    - stow
+    - xorg
+
+#- name: Stow ThinkPad configs
+#  shell: "stow -v 
