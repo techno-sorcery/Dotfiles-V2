@@ -21,6 +21,7 @@ alias tree='tree -C'
 alias less='most -s'
 alias cal='ncal'
 alias top='htop'
+alias apt-get='apt'
 
 # Env vars
 export TERM=xterm-256color
