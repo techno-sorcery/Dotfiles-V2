@@ -24,6 +24,7 @@
         - "Photos"
         - "Games"
         - "Photos/Screenshots"
+        - "Photos/Wallpapers"
       tags:
         - base
         - config
@@ -31,5 +32,5 @@
     - include: tasks/install.yml
 
   tasks:
-    - include: tasks/stow.yml
+    - include: tasks/dotfiles.yml
     - include: tasks/cdda.yml
