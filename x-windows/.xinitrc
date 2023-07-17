@@ -7,7 +7,6 @@
 # invoke global X session script
 #. /etc/X11/Xsession
 
-#compton --backend glx --paint-on-overlay --glx-no-stencil --vsync opengl-swc &
 picom -b &
 feh --bg-fill ~/.dotfiles/wallpapers/jesus1.jpg &
 xrdb -merge  ~/.Xresources &
