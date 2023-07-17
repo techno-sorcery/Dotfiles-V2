@@ -1,0 +1,35 @@
+- name: Download CDDA
+  become: true
+  get_url:
+    url: https://github.com/CleverRaven/Cataclysm-DDA/releases/download/0.G/cdda-linux-tiles-sounds-x64-2023-03-01-0054.tar.gz
+    dest: /tmp
+  tags:
+    - cdda
+    - install
+
+- name: Download CDDA dependencies
+  become: true
+  package:
+    name:
+      - libsdl2-mixer-2.0-0
+      - libsdl2-image-2.0-0
+      - libsdl2-ttf-2.0-0
+  tags:
+    - cdda
+    - install
+
+- name: Unpack CDDA
+  unarchive:
+    src: /tmp/cdda-linux-tiles-sounds-x64-2023-03-01-0054.tar.gz
+    dest: ~/Games
+  tags:
+    - cdda
+    - install
+
+- name: Make CDDA executable
+  file:
+    dest: ~/Games/cataclysmdda-0.F/cataclysm-launcher
+    mode: a+x
+  tags:
+    - cdda
+    - install

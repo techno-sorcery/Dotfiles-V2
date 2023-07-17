@@ -1,0 +1,35 @@
+- name: Hayden's automated Debian setup script
+  hosts: localhost
+
+  pre_tasks:
+    - name: Upgrade package list
+      become: true
+      apt:
+        force_apt_get: true
+        update_cache: true
+        state: present
+      tags:
+        - base
+        - install
+
+    - name: Make home directories
+      file:
+        path: "{{ lookup('env', 'HOME') }}/{{ item }}"
+        state: directory
+        mode: 0755
+      loop:
+        - ".dotfiles"
+        - "Documents"
+        - "Downloads"
+        - "Photos"
+        - "Games"
+        - "Photos/Screenshots"
+      tags:
+        - base
+        - config
+
+    - include: tasks/install.yml
+
+  tasks:
+    - include: tasks/stow.yml
+    - include: tasks/cdda.yml
