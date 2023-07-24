@@ -2,6 +2,16 @@
   hosts: localhost
 
   pre_tasks:
+    - name: Add non-free, contrib repos
+      become: true
+      replace:
+        path: /etc/apt/sources.list
+        regexp: '(non-free-firmware)$'
+        replace: 'contrib non-free'
+      tags:
+        - base
+        - install
+
     - name: Upgrade package list
       become: true
       apt:
@@ -18,7 +28,6 @@
         state: directory
         mode: 0755
       loop:
-        - ".dotfiles"
         - "Documents"
         - "Downloads"
         - "Photos"
@@ -29,8 +38,10 @@
         - base
         - config
 
-    - include: tasks/install.yml
-
   tasks:
-    - include: tasks/dotfiles.yml
+    - include: tasks/base-install.yml
+    - include: tasks/base-config.yml
+    - include: tasks/flatpak-install.yml
+    - include: tasks/kjv.yml
+    - include: tasks/vivaldi.yml
     - include: tasks/cdda.yml
