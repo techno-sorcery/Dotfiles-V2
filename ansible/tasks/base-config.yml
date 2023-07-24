@@ -1,0 +1,48 @@
+- name: Stow CLI configs
+  shell: "stow -d ../dotfiles -t ~/ -v --adopt {{ item }}"
+  loop:
+    - htop
+    - most
+    - tmux
+    - zsh
+  tags:
+    - base
+    - config
+    - stow
+    - core
+
+- name: Stow xorg, wm, and wm utility configs
+  shell: "stow -d ../dotfiles -t ~/ -v --adopt {{ item }}"
+  loop:
+    - conky
+    - picom
+    - rofi
+    - spectrwm
+    - x-windows
+  tags:
+    - base
+    - config
+    - stow
+    - xorg
+
+- name: Link tlp config
+  become: true
+  file:
+    src: "../dotfiles/tlp/tlp.conf"
+    dest: "/etc/tlp.conf"
+    state: link
+    force: true
+  tags:
+    - config
+    - thinkpad
+    - tlp
+
+- name: Set zsh as default shell
+  become: true
+  shell: chsh -s /bin/zsh
+  tags:
+    - base
+    - config
+    - zsh
+
+

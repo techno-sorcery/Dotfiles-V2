@@ -1,0 +1,86 @@
+- name: Install core CLI utilities
+  become: true
+  package:
+    name:
+      - atool
+      - curl
+      - ffmpeg
+      - gcc
+      - git
+      - htop
+      - lm-sensors
+      - make
+      - man
+      - most
+      - ncal
+      - neofetch
+      - neovim
+      - network-manager
+      - pipx
+      - ssh
+      - stow
+      - sudo
+      - tmux
+      - tree
+      - unzip
+      - wget
+      - zsh
+  tags:
+    - base
+    - install
+    - core
+
+- name: Install extra CLI utilities
+  become: true
+  package:
+    name:
+      - dictd
+      - dict-gcide
+      - neomutt
+      - orpie
+      - rtorrent
+      - newsboat
+      - w3m
+      - w3m-img
+  tags:
+    - install
+    - cli-extras
+
+- name: Install Xorg, WM, and GUI utilities
+  become: true
+  package:
+    name:
+      - alsa-utils
+      - conky
+      - feh
+      - mpv
+      - picom
+      - pulseaudio
+      - rofi
+      - rxvt-unicode
+      - scrot
+      - slock
+      - spectrwm
+      - x11-utils
+      - x11-xserver-utils
+      - xinit
+      - xinput
+      - xserver-xorg-core
+      - xserver-xorg-input-libinput
+      - zathura
+  tags:
+    - base
+    - install
+    - xorg
+
+- name: Install ThinkPad utilities
+  become: true
+  package:
+    name:
+      - autorandr
+      - light
+      - tlp
+      - upower
+  tags:
+    - install
+    - thinkpad

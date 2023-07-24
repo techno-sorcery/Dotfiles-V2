@@ -1,0 +1,30 @@
+- name: Install flatpak
+  become: true
+  package:
+    name:
+      - flatpak
+  tags:
+    - flatpak
+    - install
+
+- name: Add flathub repo
+  become: true
+  shell: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  tags:
+    - flatpak
+    - install
+
+- name: Install flatpak GUI extras
+  flatpak:
+    name:
+      - org.kde.krita
+      - com.mojang.Minecraft
+      - org.shotcut.Shotcut
+      - org.tenacityaudio.Tenacity
+      - org.signal.Signal
+      - com.valvesoftware.Steam
+      - us.zoom.Zoom
+  tags:
+    - flatpak
+    - install
+    - gui-extras
