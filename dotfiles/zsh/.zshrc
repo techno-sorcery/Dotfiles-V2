@@ -32,6 +32,9 @@ if [ -d "/var/lib/flatpak/exports/share/applications" ]; then
     export XDG_DATA_DIRS="/usr/local/share/:/usr/share/:/var/lib/flatpak/exports/share"
 fi
 
+if [ -d "$HOME/.cargo/bin" ]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
 
 # Autorun
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then

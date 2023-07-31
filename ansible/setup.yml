@@ -32,6 +32,7 @@
         - "Downloads"
         - "Photos"
         - "Games"
+        - "Git"
         - "Photos/Screenshots"
         - "Photos/Wallpapers"
       tags:
@@ -42,6 +43,5 @@
     - include: tasks/base-install.yml
     - include: tasks/base-config.yml
     - include: tasks/flatpak-install.yml
-    - include: tasks/kjv.yml
     - include: tasks/vivaldi.yml
     - include: tasks/cdda.yml

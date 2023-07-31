@@ -4,6 +4,7 @@
     name:
       - atool
       - curl
+      - default-jre
       - ffmpeg
       - gcc
       - git

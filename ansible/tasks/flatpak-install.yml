@@ -19,6 +19,7 @@
     name:
       - org.kde.krita
       - com.mojang.Minecraft
+      - io.github.hrkfdn.ncspot
       - org.shotcut.Shotcut
       - org.tenacityaudio.Tenacity
       - org.signal.Signal
