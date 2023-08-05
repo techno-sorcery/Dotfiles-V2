@@ -34,7 +34,13 @@
         - "Games"
         - "Git"
         - "Photos/Screenshots"
-        - "Photos/Wallpapers"
+      tags:
+        - base
+        - config
+
+    - name: Create wallpaper symlink
+      shell:
+        cmd: ln -frs ../Wallpapers ~/Photos/Wallpapers
       tags:
         - base
         - config
