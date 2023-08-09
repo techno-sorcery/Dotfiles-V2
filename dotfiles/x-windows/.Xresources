@@ -2,9 +2,12 @@
 Xft.dpi: 115
 
 ! Font
-*font: xft:terminus:pixelsize=17
-*letterSpace: 1
-
+/* *font: xft:terminus:size=10,\ */
+            /* -*-unifont-*-*-*-*-*-*-*-*-*-*-*-* */
+/* *font: xft:terminus:size=10 */
+/* *letterSpace: 1 */
+*font: xft:Terminess\ Powerline:size=10
+/* xft:Fixed:antialias=false:style=ja:pixelsize=17 */
 ! urxvt
 urxvt*depth: 32
 urxvt*background: rgba:0000/0000/0000/ca00
@@ -12,21 +15,5 @@ urxvt*background: rgba:0000/0000/0000/ca00
 ! Interface
 URxvt.scrollBar: false
 
-
 ! Colors
 *foreground: gray
-
-/* *.color0:   black */
-/* *.color8:   gray30 */
-
-/* *.color1:   red3 */
-/* *.color9:   red2 */
-
-/* *.color2:   #5f875f */
-/* *.color10:  #5faf5f */
-
-/* *.color3:   yellow3 */
-/* *.color11:   yellow2 */
-
-/* *.color4:   dodgerblue3 */
-/* *.color12:  dodgerblue2 */
