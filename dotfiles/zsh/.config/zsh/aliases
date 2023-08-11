@@ -1,0 +1,9 @@
+# Aliases
+
+alias ls='ls --color=auto'
+alias tree='tree -C'
+alias less='most -s'
+alias cal='ncal'
+alias top='htop'
+alias apt-get='apt'
+alias dict='dict -d gcide'
