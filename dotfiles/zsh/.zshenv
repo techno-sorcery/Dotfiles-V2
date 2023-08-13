@@ -3,11 +3,7 @@
 # Programs
 export EDITOR="nvim"
 export PAGER="most -s"
-export TERM="rxvt-256color"
-
-# less
-export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
-export LESS=' -R '
+export TERM="urxvt-256color"
 
 # zsh
 export ZDOTDIR="$HOME/.config/zsh"

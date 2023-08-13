@@ -1,3 +1,9 @@
+# Znap Plugin Manager
+[[ -r $ZDOTDIR/plugins/znap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+    https://github.com/marlonrichert/zsh-snap.git $ZDOTDIR/plugins/znap
+    source $ZDOTDIR/plugins/znap/znap.zsh 
+
 # Vim bindings
 bindkey -v
 export KEYTIMEOUT=1
@@ -46,7 +52,9 @@ source "$ZDOTDIR/aliases"
 
 # Plugins
 source "$ZDOTDIR/plugins/cursor.zsh"
-source "$ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-source "$ZDOTDIR/plugins/bd.zsh"
+# source "$ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+# source "$ZDOTDIR/plugins/bd.zsh"
 #source "$ZDOTDIR/plugins/surround.zsh"
 #source "$ZDOTDIR/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+znap source zdharma-continuum/fast-syntax-highlighting
+znap source hlissner/zsh-autopair

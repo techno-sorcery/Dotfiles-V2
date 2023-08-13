@@ -6,7 +6,7 @@ Xft.dpi: 115
             /* -*-unifont-*-*-*-*-*-*-*-*-*-*-*-* */
 /* *font: xft:terminus:size=10 */
 /* *letterSpace: 1 */
-*font: xft:Terminess\ Powerline:size=10
+*font: xft:Terminess Powerline:size=10
 /* xft:Fixed:antialias=false:style=ja:pixelsize=17 */
 ! urxvt
 urxvt*depth: 32

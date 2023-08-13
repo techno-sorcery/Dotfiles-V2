@@ -15,3 +15,4 @@ bind-key k up
 bind-key l open
 bind-key h quit
 
+cache-file "~/.cache/newsboat/cache.db"

@@ -1,9 +1,12 @@
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
-    Plug 'tomasiser/vim-code-dark'          " VS Code theme
-    Plug 'vim-airline/vim-airline'          " Improved status bar
-    Plug 'tpope/vim-commentary'             " Selection commenting
-    Plug 'windwp/nvim-autopairs'            " Pair delimiters
+    Plug 'tomasiser/vim-code-dark'              " VS Code theme
+    Plug 'vim-airline/vim-airline'              " Improved status bar
+    Plug 'tpope/vim-commentary'                 " Selection commenting
+    Plug 'windwp/nvim-autopairs'                " Pair delimiters
+    Plug 'lukas-reineke/indent-blankline.nvim'  " Indentation lines
+    Plug 'junegunn/goyo.vim'                    " Comfortable formatting
+    Plug 'dhruvasagar/vim-table-mode'           " Table rendering
 
     " LSP
     Plug 'neovim/nvim-lspconfig'
@@ -23,18 +26,20 @@ call plug#end()
 " Basics
 filetype on
 filetype plugin on
-filetype indent on
-set nocompatible
- syntax on 
+filetype indent on      " Indent based on filetype
+set nocompatible        " Ignore defaults
+syntax on               " Use syntax highlighting
 set number              " Show line number
-set directory^=$HOME/.cache/nvim//
+set directory^=$HOME/.cache/nvim//  " Set cache directory
+set cursorline          " Use cursorline
+
+" Bindings
+nnoremap <Space> <NOP>
+let mapleader =" "      " Set leader to spacebar
+map <leader>g :Goyo \| set spell \| set linebreak<CR>
+map <leader>p :PlugInstall<cr>
 
 " Cursor settings
-set cursorline
-hi clear CursorLine
-hi CursorLine ctermbg=236
-hi clear CursorLineNR
-hi CursorLineNR ctermbg=236
 
 " Match paren
 let g:matchparen_timeout = 20
@@ -71,9 +76,18 @@ set ttimeoutlen=0
 let g:SuperTabDefaultCompletionType = "<c-n>"   " SupeTab from top to bottom
 source ~/.config/nvim/lua_init.lua
 
+" Enable Goyo by default for mutt writing
+autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
+autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo | set bg=light
+autocmd BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
+autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
+autocmd! User GoyoLeave nested | colorscheme cool | set nospell
+let g:goyo_width = 115
+
 " vim-airline
 let g:airline_theme = 'codedark'
 let g:airline_powerline_fonts = 1
 
 " Theming
 source ~/.config/nvim/cool.vim
+colorscheme cool
