@@ -75,6 +75,7 @@ set ttimeoutlen=0
 " Plugin options
 let g:SuperTabDefaultCompletionType = "<c-n>"   " SupeTab from top to bottom
 source ~/.config/nvim/lua_init.lua
+source /usr/share/doc/fzf/examples/fzf.vim
 
 " Enable Goyo by default for mutt writing
 autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80

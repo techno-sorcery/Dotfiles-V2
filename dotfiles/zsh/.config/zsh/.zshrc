@@ -51,10 +51,9 @@ source "$ZDOTDIR/autorun"
 source "$ZDOTDIR/aliases"
 
 # Plugins
-source "$ZDOTDIR/plugins/cursor.zsh"
-# source "$ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-# source "$ZDOTDIR/plugins/bd.zsh"
-#source "$ZDOTDIR/plugins/surround.zsh"
-#source "$ZDOTDIR/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 znap source zdharma-continuum/fast-syntax-highlighting
 znap source hlissner/zsh-autopair
+
+source "$ZDOTDIR/plugins/cursor.zsh"
+source "/usr/share/doc/fzf/examples/completion.zsh"
+source "/usr/share/doc/fzf/examples/key-bindings.zsh"

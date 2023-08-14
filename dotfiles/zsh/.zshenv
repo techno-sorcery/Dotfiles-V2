@@ -3,7 +3,11 @@
 # Programs
 export EDITOR="nvim"
 export PAGER="most -s"
-export TERM="urxvt-256color"
+export TERM="rxvt-256color"
+
+# fzf
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+
 
 # zsh
 export ZDOTDIR="$HOME/.config/zsh"
