@@ -28,7 +28,6 @@
       - tree
       - unzip
       - wget
-      - yarn
       - zsh
   tags:
     - base
@@ -41,6 +40,8 @@
     name:
       - dictd
       - dict-gcide
+      - dict-wn
+      - isync
       - neomutt
       - orpie
       - rtorrent

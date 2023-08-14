@@ -17,6 +17,7 @@
 - name: Install flatpak GUI extras
   flatpak:
     name:
+      - com.discordapp.Discord
       - org.kde.krita
       - com.mojang.Minecraft
       - io.github.hrkfdn.ncspot
