@@ -29,17 +29,22 @@ filetype plugin on
 filetype indent on      " Indent based on filetype
 set nocompatible        " Ignore defaults
 syntax on               " Use syntax highlighting
-set number              " Show line number
 set directory^=$HOME/.cache/nvim//  " Set cache directory
 set cursorline          " Use cursorline
+set number              " Show line number
+
+" Switch between relative and absolute
+augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+:  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+:augroup END
 
 " Bindings
 nnoremap <Space> <NOP>
 let mapleader =" "      " Set leader to spacebar
 map <leader>g :Goyo \| set spell \| set linebreak<CR>
 map <leader>p :PlugInstall<cr>
-
-" Cursor settings
 
 " Match paren
 let g:matchparen_timeout = 20

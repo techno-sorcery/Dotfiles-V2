@@ -2,12 +2,9 @@
 Xft.dpi: 115
 
 ! Font
-/* *font: xft:terminus:size=10,\ */
-            /* -*-unifont-*-*-*-*-*-*-*-*-*-*-*-* */
-/* *font: xft:terminus:size=10 */
-/* *letterSpace: 1 */
 *font: xft:Terminess Powerline:size=10
-/* xft:Fixed:antialias=false:style=ja:pixelsize=17 */
+/* *font: xft:Terminess Nerd Font :size=10 */
+
 ! urxvt
 urxvt*depth: 32
 urxvt*background: rgba:0000/0000/0000/ca00
