@@ -24,9 +24,9 @@ static const char sel_bg[]          = "#005577";
 static const char sel_border[]      = "#a8a8a8";
 
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { norm_fg, norm_bg, norm_border },
-	[SchemeSel]  = { sel_fg,  sel_bg,  sel_border},
+    /*               fg         bg         border   */
+    [SchemeNorm] = { norm_fg, norm_bg, norm_border },
+    [SchemeSel]  = { sel_fg,  sel_bg,  sel_border},
 };
 static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */
 static const XPoint stickyiconbb    = {4,8};	/* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
@@ -97,6 +97,15 @@ static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
+static const char *lightinc[] = { "light", "-A", "10", NULL };
+static const char *lightdec[] = { "light", "-U", "10", NULL };
+static const char *volinc[] = { "pulsemixer", "--change-volume", "+5", NULL };
+static const char *voldec[] = { "pulsemixer", "--change-volume", "-5", NULL };
+static const char *volmute[] = { "pulsemixer", "--toggle-mute", NULL };
+static const char *micmute[] = { "amixer", "set", "Capture", "toggle", NULL };
+static const char *screenshot[] = { "scrot", "scrOUT.png", "-s", "-f", "-e", "'mv scrOUT.png ~/Photos/Screenshots/%Y-%m-%d_%H:%M:%S.png'", NULL };
+
+#include <X11/XF86keysym.h>
 static const Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -109,26 +118,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
     { MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
     { MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-    /* { MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} }, */
-    /* { MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} }, */
-    /* { MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} }, */
     { MODKEY,                       XK_Return, zoom,           {0} },
-    /* { MODKEY|Mod4Mask,              XK_u,      incrgaps,       {.i = +1 } }, */
-    /* { MODKEY|Mod4Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } }, */
-    /* { MODKEY|Mod4Mask,              XK_i,      incrigaps,      {.i = +1 } }, */
-    /* { MODKEY|Mod4Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } }, */
-    /* { MODKEY|Mod4Mask,              XK_o,      incrogaps,      {.i = +1 } }, */
-    /* { MODKEY|Mod4Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } }, */
-    /* { MODKEY|Mod4Mask,              XK_6,      incrihgaps,     {.i = +1 } }, */
-    /* { MODKEY|Mod4Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } }, */
-    /* { MODKEY|Mod4Mask,              XK_7,      incrivgaps,     {.i = +1 } }, */
-    /* { MODKEY|Mod4Mask|ShiftMask,    XK_7,      incrivgaps,     {.i = -1 } }, */
-    /* { MODKEY|Mod4Mask,              XK_8,      incrohgaps,     {.i = +1 } }, */
-    /* { MODKEY|Mod4Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } }, */
-    /* { MODKEY|Mod4Mask,              XK_9,      incrovgaps,     {.i = +1 } }, */
-    /* { MODKEY|Mod4Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } }, */
-    /* { MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} }, */
-    /* { MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} }, */
     { MODKEY,                       XK_Tab,    view,           {0} },
     { MODKEY,                       XK_x,      killclient,     {0} },
     { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -143,16 +133,21 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
     { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 
-    { MODKEY|ShiftMask,             XK_h,      cyclelayout,    {.i = -1 } },
-    { MODKEY|ShiftMask,             XK_l,      cyclelayout,    {.i = +1 } },
-
     { MODKEY|ShiftMask,             XK_q,      quit,           {1} },
     { MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} }, 
-
+    { MODKEY|ShiftMask,             XK_h,      cyclelayout,    {.i = -1 } },
+    { MODKEY|ShiftMask,             XK_l,      cyclelayout,    {.i = +1 } },
     { MODKEY|ShiftMask,             XK_j,      pushdown,       {0} },
     { MODKEY|ShiftMask,             XK_k,      pushup,         {0} },
+    { MODKEY,                       XK_s,      togglesticky,   {0} },
 
-    { MODKEY,                       XK_s,      togglesticky, {0} },
+    { 0,          XF86XK_MonBrightnessUp,      spawn,          {.v = lightinc } },
+    { 0,          XF86XK_MonBrightnessDown,    spawn,          {.v = lightdec } },
+    { 0,          XF86XK_AudioRaiseVolume,     spawn,          {.v = volinc } },
+    { 0,          XF86XK_AudioLowerVolume,     spawn,          {.v = voldec } },
+    { 0,          XF86XK_AudioMute,            spawn,          {.v = volmute } },
+    { 0,          XF86XK_AudioMicMute,         spawn,          {.v = micmute } },
+    { 0,                            XK_Print,  spawn,          {.v = screenshot } },
 
     TAGKEYS(                        XK_1,                      0)
         TAGKEYS(                        XK_2,                      1)
@@ -163,6 +158,26 @@ static const Key keys[] = {
         TAGKEYS(                        XK_7,                      6)
         TAGKEYS(                        XK_8,                      7)
         TAGKEYS(                        XK_9,                      8)
+
+        /* { MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} }, */
+        /* { MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} }, */
+        /* { MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} }, */
+        /* { MODKEY|Mod4Mask,              XK_u,      incrgaps,       {.i = +1 } }, */
+        /* { MODKEY|Mod4Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } }, */
+        /* { MODKEY|Mod4Mask,              XK_i,      incrigaps,      {.i = +1 } }, */
+        /* { MODKEY|Mod4Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } }, */
+        /* { MODKEY|Mod4Mask,              XK_o,      incrogaps,      {.i = +1 } }, */
+        /* { MODKEY|Mod4Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } }, */
+        /* { MODKEY|Mod4Mask,              XK_6,      incrihgaps,     {.i = +1 } }, */
+        /* { MODKEY|Mod4Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } }, */
+        /* { MODKEY|Mod4Mask,              XK_7,      incrivgaps,     {.i = +1 } }, */
+        /* { MODKEY|Mod4Mask|ShiftMask,    XK_7,      incrivgaps,     {.i = -1 } }, */
+        /* { MODKEY|Mod4Mask,              XK_8,      incrohgaps,     {.i = +1 } }, */
+        /* { MODKEY|Mod4Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } }, */
+        /* { MODKEY|Mod4Mask,              XK_9,      incrovgaps,     {.i = +1 } }, */
+        /* { MODKEY|Mod4Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } }, */
+        /* { MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} }, */
+        /* { MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} }, */
 };
 
 /* button definitions */
