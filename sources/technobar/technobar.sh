@@ -1,7 +1,6 @@
 #!/bin/bash
 
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-sep="  |  "
 
 main () {
 
@@ -14,10 +13,8 @@ main () {
     time=$($parent_path/time.sh)
 
     # Output
-    echo $cpu $sep $mem $sep $therm $sep $batt $sep $bright $sep $time
+    out=" $cpu | $mem | $therm | $batt | $bright | $time "
+    xsetroot -name "$out"
 }
 
-while true; do
-    main
-    sleep 0.5
-done
+main

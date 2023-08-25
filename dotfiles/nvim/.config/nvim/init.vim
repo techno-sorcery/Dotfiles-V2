@@ -7,6 +7,9 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'lukas-reineke/indent-blankline.nvim'  " Indentation lines
     Plug 'junegunn/goyo.vim'                    " Comfortable formatting
     Plug 'dhruvasagar/vim-table-mode'           " Table rendering
+    Plug 'nvim-tree/nvim-web-devicons'          " Icon pack
+    Plug 'stevearc/oil.nvim'                    " File browser in buffer
+    Plug 'vimwiki/vimwiki'                      " To-do lists and organization
 
     " LSP
     Plug 'neovim/nvim-lspconfig'
