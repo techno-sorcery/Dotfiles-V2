@@ -23,29 +23,21 @@ elif [[ $state == "Charging" ]] ; then
         icon1="󰢝"
     elif [[ $batt -le 75 ]] ; then
         icon1="󰢞"
-    elif [[ $batt -le 90 ]] ; then
+    elif [[ $batt -le 95 ]] ; then
         icon1="󰂋"
     else
         icon1="󰂄"
     fi
 else
-    if [[ $batt -le 10 ]] ; then
-        icon1="󰁺"
-    elif [[ $batt -le 20 ]] ; then
+    if [[ $batt -le 5 ]] ; then
+        icon1="󰂎"
+    elif [[ $batt -le 25 ]] ; then
         icon1="󰁻"
-    elif [[ $batt -le 30 ]] ; then
-        icon1="󰁼"
-    elif [[ $batt -le 40 ]] ; then
-        icon1="󰁽"
     elif [[ $batt -le 50 ]] ; then
         icon1="󰁾"
-    elif [[ $batt -le 60 ]] ; then
-        icon1="󰁿"
-    elif [[ $batt -le 70 ]] ; then
+    elif [[ $batt -le 75 ]] ; then
         icon1="󰂀"
-    elif [[ $batt -le 80 ]] ; then
-        icon1="󰂁"
-    elif [[ $batt -le 90 ]] ; then
+    elif [[ $batt -le 95 ]] ; then
         icon1="󰂂"
     else
         icon1="󰁹"

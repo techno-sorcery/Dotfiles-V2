@@ -34,6 +34,7 @@
         - "Games"
         - "Git"
         - "Photos/Screenshots"
+        - "Scripts"
       tags:
         - base
         - config
@@ -48,6 +49,8 @@
   tasks:
     - include: tasks/base-install.yml
     - include: tasks/base-config.yml
+    - include: tasks/suckless.yml
     - include: tasks/flatpak-install.yml
+    - include: tasks/laptop.yml
     - include: tasks/vivaldi.yml
     - include: tasks/cdda.yml

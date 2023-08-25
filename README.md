@@ -15,4 +15,4 @@ Log into your main account, and clone the repo into your home directory:
 
     git clone https://github.com/techno-sorcery/Dotfiles-V2
 
-
+It's recommended you rename it to something like ".dotfiles", and keep it as a backup.

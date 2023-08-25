@@ -1,0 +1,21 @@
+- name: Make and install dwm
+  become: true
+  make:
+    chdir: "{{ playbook_dir }}/../sources/dwm"
+    target: install
+  tags:
+    - base
+    - install
+    - suckless
+    - dwm
+
+- name: Make and install st
+  become: true
+  make:
+    chdir: "{{ playbook_dir }}/../sources/st"
+    target: install
+  tags:
+    - base
+    - install
+    - suckless
+    - st

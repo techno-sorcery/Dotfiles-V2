@@ -1,0 +1,23 @@
+- name: Install laptop utilities
+  become: true
+  package:
+    name:
+      - autorandr
+      - light
+      - tlp
+      - upower
+  tags:
+    - install
+    - laptop
+
+- name: Link tlp config
+  become: true
+  file:
+    src: "{{ playbook_dir }}/../dotfiles/tlp/tlp.conf"
+    dest: "/etc/tlp.conf"
+    state: link
+    force: true
+  tags:
+    - config
+    - laptop
+    - tlp

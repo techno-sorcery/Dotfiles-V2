@@ -17,4 +17,6 @@ main () {
     xsetroot -name "$out"
 }
 
-main
+while sleep 0.4;
+    do main;
+done
