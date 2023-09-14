@@ -2,7 +2,7 @@
 
 # Perc
 # mpstat 1 --dec=0 | awk '/all/ {print $4}' > ~/cpu.txt &
-perc="$(command top -bn 2 -d 0.05 | awk '/Cpu/ {print $2}' | tail -n 1)"
+perc="$(command top -bn 2 -d 0.1 | awk '/Cpu/ {print $2}' | tail -n 1)"
 icon1="󰘚"
 
 # Clk

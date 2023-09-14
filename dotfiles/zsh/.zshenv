@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# Main user
+export MAIN_USER="hayden"
+
 # Programs
 export EDITOR="nvim"
 export PAGER="most -s"
@@ -10,7 +13,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 # fzf
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-
+export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # zsh
 export ZDOTDIR="$HOME/.config/zsh"

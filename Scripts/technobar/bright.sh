@@ -19,7 +19,7 @@ power="$(amixer get Master | awk '/Left:/ {print $6}')"
 
 if [ $power == [off] ] ; then
     icon2="󰸈"
-    vol="0%"
+    vol="0"
 elif [[ $vol -lt 33 ]] ; then
     icon2="󰕿"
 elif [[ $vol -ge 33 && $vol -lt 66 ]] ; then

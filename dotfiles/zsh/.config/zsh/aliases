@@ -6,7 +6,10 @@ alias less='most -s'
 alias cal='ncal'
 alias top='htop'
 alias apt-get='apt'
+
 alias dict='dict -d wn'
 alias diff='diff --color'
 alias thes='dict -d moby-thesaurus'
+
+alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 # alias vim='./opt/nvim.appimage'

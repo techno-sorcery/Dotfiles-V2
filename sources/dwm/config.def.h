@@ -8,7 +8,7 @@ static const unsigned int gappiv    = 5;       /* vert inner gap between windows
 static const unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
+static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = -1;        /* 2 is the default spacing around the bar's font */
@@ -42,7 +42,7 @@ static const Rule rules[] = {
     /* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
     /* { "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 }, */
     /* { "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 }, */
-    { "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
+    { "st",      NULL,     NULL,           0,         0,          1,           0,        -1 },
     { NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -103,7 +103,7 @@ static const char *volinc[] = { "pulsemixer", "--change-volume", "+5", NULL };
 static const char *voldec[] = { "pulsemixer", "--change-volume", "-5", NULL };
 static const char *volmute[] = { "pulsemixer", "--toggle-mute", NULL };
 static const char *micmute[] = { "amixer", "set", "Capture", "toggle", NULL };
-static const char *screenshot[] = { "scrot", "scrOUT.png", "-s", "-f", "-e", "'mv scrOUT.png ~/Photos/Screenshots/%Y-%m-%d_%H:%M:%S.png'", NULL };
+static const char *screenshot[] = { "scrot", "-s", "-f", "/home/hayden/Photos/Screenshots/%Y-%m-%d_%H:%M:%S.png", NULL };
 
 #include <X11/XF86keysym.h>
 static const Key keys[] = {
@@ -140,6 +140,11 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_j,      pushdown,       {0} },
     { MODKEY|ShiftMask,             XK_k,      pushup,         {0} },
     { MODKEY,                       XK_s,      togglesticky,   {0} },
+
+	{ MODKEY,                       XK_Right,  viewnext,       {0} },
+	{ MODKEY,                       XK_Left,   viewprev,       {0} },
+	{ MODKEY|ShiftMask,             XK_Right,  tagtonext,      {0} },
+	{ MODKEY|ShiftMask,             XK_Left,   tagtoprev,      {0} },
 
     { 0,          XF86XK_MonBrightnessUp,      spawn,          {.v = lightinc } },
     { 0,          XF86XK_MonBrightnessDown,    spawn,          {.v = lightdec } },

@@ -40,10 +40,10 @@
     - config
     - zsh
 
-- name: Link technobar
+- name: Link scripts
   file:
-    src: "{{ playbook_dir }}/../dotfiles/sources/technobar/"
-    dest: "~/Scripts/technobar"
+    src: "{{ playbook_dir }}/../Scripts"
+    dest: "~/Scripts"
     state: link
     force: true
   tags:

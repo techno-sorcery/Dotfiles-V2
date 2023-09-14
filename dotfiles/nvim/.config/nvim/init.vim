@@ -6,10 +6,12 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'windwp/nvim-autopairs'                " Pair delimiters
     Plug 'lukas-reineke/indent-blankline.nvim'  " Indentation lines
     Plug 'junegunn/goyo.vim'                    " Comfortable formatting
-    Plug 'dhruvasagar/vim-table-mode'           " Table rendering
     Plug 'nvim-tree/nvim-web-devicons'          " Icon pack
-    Plug 'stevearc/oil.nvim'                    " File browser in buffer
-    Plug 'vimwiki/vimwiki'                      " To-do lists and organization
+    Plug 'tpope/vim-surround'                   " Change parentheses/quotes/etc
+    Plug 'tpope/vim-vinegar'                    " Better file browser
+    " Plug 'stevearc/oil.nvim'                    " File browser in buffer
+    " Plug 'dhruvasagar/vim-table-mode'           " Table rendering
+    " Plug 'vimwiki/vimwiki'                      " To-do lists and organization
 
     " LSP
     Plug 'neovim/nvim-lspconfig'
@@ -72,6 +74,7 @@ set history=500
 set list
 set lcs+=space:·
 set mousehide
+set scrolloff=10
 
 " Performance
 set ttyfast

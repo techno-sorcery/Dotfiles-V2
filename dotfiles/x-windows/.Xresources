@@ -2,7 +2,7 @@
 Xft.dpi: 115
 
 ! Font
-/* *font: xft:Terminus:size=10 */
+*font: xft:Terminus:size=10 */
 /* st*font: xft:Terminus:size=10 */
 /* *font: xft:Terminess Nerd Font :size=10 */
 

@@ -70,6 +70,7 @@
       - slock
       - x11-utils
       - x11-xserver-utils
+      - xfonts-terminus
       - xinit
       - xinput
       - xserver-xorg-core
@@ -85,6 +86,7 @@
       - libxinerama-dev
       - libxft-dev
       - libxcb-res0-dev
+      - libxrandr-dev
       - zathura
   tags:
     - base
