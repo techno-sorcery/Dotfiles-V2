@@ -137,16 +137,16 @@ static const Key keys[] = {
 
     { MODKEY|ShiftMask,             XK_q,      quit,           {1} },
     { MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} }, 
-    { MODKEY|ShiftMask,             XK_h,      cyclelayout,    {.i = -1 } },
-    { MODKEY|ShiftMask,             XK_l,      cyclelayout,    {.i = +1 } },
+    { MODKEY|ControlMask,           XK_h,      cyclelayout,    {.i = -1 } },
+    { MODKEY|ControlMask,           XK_l,      cyclelayout,    {.i = +1 } },
     { MODKEY|ShiftMask,             XK_j,      pushdown,       {0} },
     { MODKEY|ShiftMask,             XK_k,      pushup,         {0} },
     { MODKEY,                       XK_s,      togglesticky,   {0} },
 
-	{ MODKEY,                       XK_Right,  viewnext,       {0} },
-	{ MODKEY,                       XK_Left,   viewprev,       {0} },
-	{ MODKEY|ShiftMask,             XK_Right,  tagtonext,      {0} },
-	{ MODKEY|ShiftMask,             XK_Left,   tagtoprev,      {0} },
+	{ MODKEY|ShiftMask,             XK_l,  viewnext,       {0} },
+	{ MODKEY|ShiftMask,             XK_h,   viewprev,       {0} },
+	/* { MODKEY|ShiftMask,             XK_Right,  tagtonext,      {0} }, */
+	/* { MODKEY|ShiftMask,             XK_Left,   tagtoprev,      {0} }, */
 
     { 0,          XF86XK_MonBrightnessUp,      spawn,          {.v = lightinc } },
     { 0,          XF86XK_MonBrightnessDown,    spawn,          {.v = lightdec } },
