@@ -73,6 +73,8 @@
       - xfonts-terminus
       - xinit
       - xinput
+      - xscreensaver
+      - xscreensaver-gl
       - xserver-xorg-core
       - xserver-xorg-input-libinput
       - xcb 

@@ -50,6 +50,11 @@ source "$ZDOTDIR/autorun"
 # Aliases
 source "$ZDOTDIR/aliases"
 
+# Custom functions
+cdls() {
+  cd "$1" && ls
+}
+
 # Plugins
 znap source zdharma-continuum/fast-syntax-highlighting
 znap source hlissner/zsh-autopair

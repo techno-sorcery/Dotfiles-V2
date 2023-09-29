@@ -10,6 +10,7 @@ alias apt-get='apt'
 alias dict='dict -d wn'
 alias diff='diff --color'
 alias thes='dict -d moby-thesaurus'
+alias budget='sc-im ~/Documents/budget.sc'
 
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 # alias vim='./opt/nvim.appimage'

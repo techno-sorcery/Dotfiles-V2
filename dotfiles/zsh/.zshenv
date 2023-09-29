@@ -25,3 +25,4 @@ export SAVEHIST=1000
 # Paths
 export XDG_DATA_DIRS="/usr/local/share/:/usr/share/:/var/lib/flatpak/exports/share"
 export PATH="$PATH:/home/hayden/.local/bin"
+export DMENU_PATH="/usr/share/applications"

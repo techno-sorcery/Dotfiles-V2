@@ -1,0 +1,14 @@
+--- dmenu.c
++++ dmenu.c
+@@ -34,11 +34,6 @@ struct item {
+ 	int out;
+ };
+ 
+-typedef struct {
+-	KeySym ksym;
+-	unsigned int state;
+-} Key;
+-
+ static char text[BUFSIZ] = "";
+ static char *embed;
+ static int bh, mw, mh;

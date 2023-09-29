@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <string.h>
 
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
@@ -92,7 +93,8 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", norm_bg, "-nf", norm_fg, "-sb", sel_bg, "-sf", sel_fg, NULL };
+/* static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", norm_bg, "-nf", norm_fg, "-sb", sel_bg, "-sf", sel_fg, NULL }; */
+static const char *dmenucmd[] = { "rofi", "-show", "drun", "-theme", "dmenu", "-font", dmenufont, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
@@ -135,16 +137,16 @@ static const Key keys[] = {
 
     { MODKEY|ShiftMask,             XK_q,      quit,           {1} },
     { MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} }, 
-    { MODKEY|ControlMask,           XK_h,      cyclelayout,    {.i = -1 } },
-    { MODKEY|ControlMask,           XK_l,      cyclelayout,    {.i = +1 } },
+    { MODKEY|ShiftMask,             XK_h,      cyclelayout,    {.i = -1 } },
+    { MODKEY|ShiftMask,             XK_l,      cyclelayout,    {.i = +1 } },
     { MODKEY|ShiftMask,             XK_j,      pushdown,       {0} },
     { MODKEY|ShiftMask,             XK_k,      pushup,         {0} },
     { MODKEY,                       XK_s,      togglesticky,   {0} },
 
-	{ MODKEY|ShiftMask,             XK_l,   viewnext,          {0} },
-	{ MODKEY|ShiftMask,             XK_h,   viewprev,          {0} },
-	/* { MODKEY|ShiftMask,             XK_Right,  tagtonext,      {0} }, */
-	/* { MODKEY|ShiftMask,             XK_Left,   tagtoprev,      {0} }, */
+	{ MODKEY,                       XK_Right,  viewnext,       {0} },
+	{ MODKEY,                       XK_Left,   viewprev,       {0} },
+	{ MODKEY|ShiftMask,             XK_Right,  tagtonext,      {0} },
+	{ MODKEY|ShiftMask,             XK_Left,   tagtoprev,      {0} },
 
     { 0,          XF86XK_MonBrightnessUp,      spawn,          {.v = lightinc } },
     { 0,          XF86XK_MonBrightnessDown,    spawn,          {.v = lightdec } },

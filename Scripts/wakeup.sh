@@ -1,3 +1,2 @@
-!#/bin/bash
-#autorandr -c
-slock
+#!/bin/bash
+xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 0.4
