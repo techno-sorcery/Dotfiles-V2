@@ -2,9 +2,9 @@
   become: true
   package:
     name:
-      - autoconf
-      - atool
       - ansible
+      - atool
+      - autoconf
       - curl
       - default-jre
       - ffmpeg
@@ -41,14 +41,13 @@
   become: true
   package:
     name:
-      - dictd
       - dict-gcide
       - dict-wn
+      - dictd
       - isync
       - neomutt
-      - orpie
-      - rtorrent
       - newsboat
+      - orpie
       - w3m
       - w3m-img
   tags:
@@ -62,33 +61,34 @@
       - alsa-utils
       - feh
       - fonts-noto-color-emoji
+      - libx11-dev
+      - libx11-xcb-dev 
+      - libxcb-res0-dev
+      - libxcb-xkb-dev 
+      - libxft-dev
+      - libxinerama-dev
+      - libxkbcommon-x11-dev 
+      - libxrandr-dev
+      - libxtst-dev
       - mpv
       - picom
       - pulseaudio
+      - rofi
       - rxvt-unicode
       - scrot
       - slock
       - x11-utils
+      - x11-xkb-utils 
       - x11-xserver-utils
+      - xcb 
       - xfonts-terminus
       - xinit
       - xinput
       - xscreensaver
-      - xscreensaver-gl
+      - xscreensaver-data-extra
       - xserver-xorg-core
       - xserver-xorg-input-libinput
-      - xcb 
       - xutils-dev
-      - libxcb-xkb-dev 
-      - x11-xkb-utils 
-      - libx11-xcb-dev 
-      - libxkbcommon-x11-dev 
-      - libxtst-dev
-      - libx11-dev
-      - libxinerama-dev
-      - libxft-dev
-      - libxcb-res0-dev
-      - libxrandr-dev
       - zathura
   tags:
     - base

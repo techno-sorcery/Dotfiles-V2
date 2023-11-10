@@ -54,3 +54,4 @@
     - include: tasks/laptop.yml
     - include: tasks/vivaldi.yml
     - include: tasks/cdda.yml
+    - include: tasks/kjv.yml

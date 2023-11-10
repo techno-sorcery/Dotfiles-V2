@@ -17,14 +17,17 @@
 - name: Install flatpak GUI extras
   flatpak:
     name:
-      - com.discordapp.Discord
-      - org.kde.krita
-      - com.mojang.Minecraft
-      - io.github.hrkfdn.ncspot
-      - org.shotcut.Shotcut
-      - org.tenacityaudio.Tenacity
-      - org.signal.Signal
+      - cc.arduino.IDE2
+      - com.github.corna.Vivado
+      - com.github.tchx84.Flatseal
+      - com.spotify.Client
       - com.valvesoftware.Steam
+      - org.inkscape.Inkscape
+      - org.kde.krita
+      - org.qbittorrent.qBittorrent
+      - org.shotcut.Shotcut
+      - org.signal.Signal
+      - org.tenacityaudio.Tenacity
       - us.zoom.Zoom
   tags:
     - flatpak

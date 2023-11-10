@@ -11,10 +11,11 @@ picom -b &
 feh --bg-fill ~/Photos/Wallpapers/space2.jpg &
 xrdb -merge  ~/.Xresources &
 xrandr --output eDP-1 --gamma 1:0.95:1 &
+xinput set-prop "Kensington ORBIT WIRELESS TB Mouse" "libinput Middle Emulation Enabled" 1 &
 xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" .4 &
 numlockx &
-xinput set-prop "Kensington ORBIT WIRELESS TB Mouse" "libinput Middle Emulation Enabled" 1 &
 ./Scripts/technobar/technobar.sh &
+./Scripts/wakeup.sh &
 xscreensaver --no-splash &
 autorandr -c
 st &

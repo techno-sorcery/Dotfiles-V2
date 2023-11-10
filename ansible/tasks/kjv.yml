@@ -1,14 +1,19 @@
 - name: Download kjv Bible
   become: true
-  get_url:
-    url: https://github.com/lukesmithxyz/kjv.git
-    dest: /tmp
+  git:
+    repo: https://github.com/lukesmithxyz/kjv.git
+    dest: /tmp/kjv
+    force: true
   tags:
     - install
     - cli-extras
     - kjv
 
-#- name: Install kjv Bible
-#  become: true
-#  make:
-#    chdir: /tmp/kjv
+- name: Install kjv Bible
+  become: true
+  make:
+    chdir: /tmp/kjv
+  tags:
+    - install
+    - cli-extras
+    - kjv
