@@ -2,7 +2,6 @@
   shell: "stow -d ../dotfiles -t ~/ -v --adopt {{ item }}"
   loop:
     - htop
-    - most
     - tmux
     - nvim
     - zsh

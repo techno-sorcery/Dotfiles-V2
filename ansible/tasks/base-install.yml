@@ -16,7 +16,6 @@
       - lm-sensors
       - make
       - man
-      - most
       - ncal
       - neofetch
       - neovim

@@ -15,8 +15,8 @@ if [[ !(-d "/sys/class/power_supply/BAT0") ]] ; then
     sym=""
     time=""
 elif [[ $state == "Charging" ]] ; then
-    if [[ $batt -le 5 ]] ; then
-        icon1="󰂎"
+    if [[ $batt -le 10 ]] ; then
+        icon1="󰢟"
     elif [[ $batt -le 25 ]] ; then
         icon1="󰂆"
     elif [[ $batt -le 50 ]] ; then
@@ -29,7 +29,7 @@ elif [[ $state == "Charging" ]] ; then
         icon1="󰂄"
     fi
 else
-    if [[ $batt -le 5 ]] ; then
+    if [[ $batt -le 10 ]] ; then
         icon1="󰂎"
     elif [[ $batt -le 25 ]] ; then
         icon1="󰁻"

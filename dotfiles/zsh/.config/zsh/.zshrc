@@ -6,6 +6,7 @@
 
 # Vim bindings
 bindkey -v
+bindkey -v '^?' backward-delete-char
 export KEYTIMEOUT=1
 
 # Auto complete

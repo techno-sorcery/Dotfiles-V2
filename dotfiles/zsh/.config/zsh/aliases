@@ -2,8 +2,9 @@
 
 alias ls='ls --color=auto'
 alias tree='tree -C'
-alias less='most -s'
-alias cal='ncal'
+alias less=$PAGER
+alias cal='ncal -b'
+alias ncal='ncal -b'
 alias top='htop'
 alias apt-get='apt'
 

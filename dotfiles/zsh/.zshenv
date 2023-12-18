@@ -5,8 +5,8 @@ export MAIN_USER="hayden"
 
 # Programs
 export EDITOR="nvim"
-export PAGER="most -s"
-export TERM="rxvt-256color"
+export TERM="st-256color"
+export PAGER='less -SsMJ +Gg -x4 -z-2 --use-color -DP15.12 -DS0.11 -DR0.1 -Dd205 -Du75'
 
 # java
 export _JAVA_AWT_WM_NONREPARENTING=1
