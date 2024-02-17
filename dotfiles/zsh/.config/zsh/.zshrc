@@ -43,7 +43,7 @@ alias d='dirs -v'
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
 
 # Prompt string
-PS1='%F{10}%n%f:%F{12}%~%f$ '
+PS1='%B%F{10}%n%f%b:%F{12}%~%f$ '
 
 # Autorun
 source "$ZDOTDIR/autorun"

@@ -26,7 +26,6 @@
       - ssh
       - stow
       - sudo
-      - tmux
       - tree
       - unzip
       - wget
@@ -43,12 +42,12 @@
       - dict-gcide
       - dict-wn
       - dictd
-      - isync
-      - neomutt
-      - newsboat
+        #- isync
+        #- neomutt
+        #- newsboat
       - orpie
-      - w3m
-      - w3m-img
+        #- w3m
+        #- w3m-img
   tags:
     - install
     - cli-extras
@@ -60,6 +59,9 @@
       - alsa-utils
       - feh
       - fonts-noto-color-emoji
+      - libsdl2-image-2.0-0 
+      - libsdl2-mixer-2.0-0
+      - libsdl2-ttf-2.0-0
       - libx11-dev
       - libx11-xcb-dev 
       - libxcb-res0-dev
@@ -70,12 +72,14 @@
       - libxrandr-dev
       - libxtst-dev
       - mpv
+      - numlockx
       - picom
       - pulseaudio
+      - pulseaudio-module-bluetooth
+      - pulsemixer
       - rofi
-      - rxvt-unicode
       - scrot
-      - slock
+      - unifont
       - x11-utils
       - x11-xkb-utils 
       - x11-xserver-utils

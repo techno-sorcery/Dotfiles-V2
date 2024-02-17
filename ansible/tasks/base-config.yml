@@ -2,7 +2,7 @@
   shell: "stow -d ../dotfiles -t ~/ -v --adopt {{ item }}"
   loop:
     - htop
-    - tmux
+      #- tmux
     - nvim
     - zsh
   tags:
@@ -11,19 +11,20 @@
     - stow
     - core
 
-- name: Stow CLI extras
-  shell: "stow -d ../dotfiles -t ~/ -v --adopt {{ item }}"
-  loop:
-    - newsboat
-  tags:
-    - config
-    - stow
-    - cli-extras
+      #- name: Stow CLI extras
+      #shell: "stow -d ../dotfiles -t ~/ -v --adopt {{ item }}"
+      #loop:
+      #- newsboat
+      #tags:
+      #- config
+      #- stow
+      #- cli-extras
 
 - name: Stow xorg, wm, and wm utility configs
   shell: "stow -d ../dotfiles -t ~/ -v --adopt {{ item }}"
   loop:
     - picom
+    - rofi
     - x-windows
   tags:
     - base

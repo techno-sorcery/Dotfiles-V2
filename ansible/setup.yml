@@ -29,11 +29,17 @@
         mode: 0755
       loop:
         - "Documents"
+        - "Documents/pdfs"
         - "Downloads"
-        - "Photos"
         - "Games"
         - "Git"
-        - "Photos/Screenshots"
+        - "Media"
+        - "Media/movies"
+        - "Media/music"
+        - "Media/tv"
+        - "Photos"
+        - "Photos/screenshots"
+        - "School"
         - "Scripts"
       tags:
         - base
@@ -41,7 +47,7 @@
 
     - name: Create wallpaper symlink
       shell:
-        cmd: ln -frs ../Wallpapers ~/Photos/Wallpapers
+        cmd: ln -frs ../wallpapers ~/Photos/wallpapers
       tags:
         - base
         - config
@@ -52,6 +58,6 @@
     - include: tasks/suckless.yml
     - include: tasks/flatpak-install.yml
     - include: tasks/laptop.yml
-    - include: tasks/vivaldi.yml
-    - include: tasks/cdda.yml
+      #- include: tasks/vivaldi.yml
+      #- include: tasks/cdda.yml
     - include: tasks/kjv.yml

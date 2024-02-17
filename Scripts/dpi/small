@@ -1,0 +1,10 @@
+! Display
+Xft.dpi: 90
+
+! Font
+*font: Terminus:size=10
+*rofifont: Terminus 9
+*user_bh: 2
+
+! Colors
+*foreground: gray
