@@ -15,6 +15,8 @@ alias rars='java -jar ~/Documents/execs/rars1_6.jar'
 
 alias flac2mp3='find * -depth -name "*.flac" -exec ffmpeg -i {} -codec:a libmp3lame -b:a 320k {}.mp3 \;'
 alias m4a2mp3=' find * -depth -name "*.m4a" -exec ffmpeg -i {} -codec:a libmp3lame -b:a 320k {}.mp3 \;'
+alias artist='for dir in *; do id3v2 -a $dir $dir/*/*.mp3; done'
+alias genre='for dir in *; do id3v2 -g $dir $dir/*/*/*.mp3; done'
 
 alias dict='dict -d wn'
 alias diff='diff --color'

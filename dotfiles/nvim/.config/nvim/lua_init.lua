@@ -30,6 +30,9 @@ vim.opt.scrolloff = 10                  -- Lines to pad cursor
 vim.opt.undofile = true                 -- Save undo history to file
 vim.opt.undodir = "/home/hayden/.cache/nvim"       -- Set undo file directory
 
+vim.opt.formatoptions = "c"
+vim.opt.formatoptions = "r"
+vim.opt.formatoptions = "o"
 
 -- Goyo
 vim.g["goyo_width"] = 115                           -- Width of goyo window
