@@ -58,6 +58,5 @@
     - include: tasks/suckless.yml
     - include: tasks/flatpak-install.yml
     - include: tasks/laptop.yml
-      #- include: tasks/vivaldi.yml
-      #- include: tasks/cdda.yml
+    - include: tasks/fonts.yml
     - include: tasks/kjv.yml

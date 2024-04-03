@@ -21,14 +21,14 @@ vim.opt.hlsearch = true                 -- Automatically highlight
 vim.opt.showcmd = true                  -- Show last command on status
 vim.opt.showmode = true                 -- Show current mode on status
 
-vim.opt.dir = "/home/hayden/.cache/nvim"           -- Set swapfile directory
-vim.opt.bdir = "/home/hayden/.cache/nvim"          -- Set backup file directory
+vim.opt.dir = "/home/" .. os.getenv("USER") .. "/.cache/nvim"           -- Set swapfile directory
+vim.opt.bdir = "/home/".. os.getenv("USER") .."/.cache/nvim"          -- Set backup file directory
 
 vim.opt.history = 500                   -- Remember 500 last commands
 vim.opt.scrolloff = 10                  -- Lines to pad cursor
 
 vim.opt.undofile = true                 -- Save undo history to file
-vim.opt.undodir = "/home/hayden/.cache/nvim"       -- Set undo file directory
+vim.opt.undodir = "/home/".. os.getenv("USER") .."/.cache/nvim"       -- Set undo file directory
 
 vim.opt.formatoptions = "c"
 vim.opt.formatoptions = "r"
@@ -73,7 +73,7 @@ require("lazy").setup({
     "ervandew/supertab",                    -- Tab complete
     "junegunn/goyo.vim",                    -- Comfortable formatting
     "lukas-reineke/indent-blankline.nvim",  -- Indentation lines
-    "mfussenegger/nvim-lint",               -- Linting support
+    -- "mfussenegger/nvim-lint",               -- Linting support
     "mg979/vim-visual-multi",               -- Multi-cursor editing
     "nvim-tree/nvim-web-devicons",          -- Icon pack
     "stevearc/oil.nvim",                    -- File browser in buffer
@@ -81,7 +81,7 @@ require("lazy").setup({
     "tpope/vim-commentary",                 -- Selection commenting
     "tpope/vim-surround",                   -- Change parentheses/quotes/etc
     "vim-airline/vim-airline",              -- Improved status bar
-    "windwp/nvim-autopairs",                -- Pair delimiters
+    "windwp/nvim-autopairs",                -- Pair parentheses and brackets
 })
 
 
@@ -102,19 +102,25 @@ require("ibl").setup({
 
 
 -- Set up linting
-require('lint').linters_by_ft = {
-    python = { 'mypy',},
-    markdown = {'vale',}
-}
+-- require('lint').linters_by_ft = {
+--     markdown = {'vale',}
+-- }
+
+-- vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+--   callback = function()
+--     require("lint").try_lint()
+--   end,
+-- })
+
+-- local lint_progress = function()
+--   local linters = require("lint").get_running()
+--   if #linters == 0 then
+--       return "󰦕"
+--   end
+--   return "󱉶 " .. table.concat(linters, ", ")
+-- end
 
 
--- Disable new line comment
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { '*' },
-    callback = function()
-        vim.opt.formatoptions = "c"
-        vim.opt.formatoptions = "r"
-        vim.opt.formatoptions = "o"
-    end,
-    group = generalSettingsGroup,
-})
+-- Disable new line comments
+vim.cmd('autocmd BufEnter * set formatoptions-=cro')
+vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro')

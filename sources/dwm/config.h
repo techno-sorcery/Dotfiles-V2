@@ -12,10 +12,12 @@ static int smartgaps          = 0;        /* 1 means no outer gap when there is 
 static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int extrabar           = 0;        /* 0 means no extra bar */
+static const char statussep         = ';';      /* separator between statuses */
 static int user_bh                  = 1; /* 2 is the default spacing around the bar's font */
-static char font[]                  = "Terminess Nerd Font:size=11";
+static char font[]                  = "Terminess Nerd Font:size=12";
 static char rofifont[]              = "Terminus 10";
-static const char *fonts[]          = { font };
+static const char *fonts[]          = { "Terminus:size=10", "Noto Color Emoji:size=9"};
 static const char dmenufont[]       = "Terminus:size=10";
 
 static char norm_fg[]         = "#dadada";
@@ -33,6 +35,9 @@ static const char *colors[][3]      = {
 };
 static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */
 static const XPoint stickyiconbb    = {4,8};	/* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
+
+/* staticstatus */
+static const int statmonval = 0;
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -107,11 +112,14 @@ ResourcePref resources[] = {
 
 /* key definitions */
 #define MODKEY Mod1Mask
+#define ALTMOD Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 { MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 { MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 { MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} }, \
+{ ALTMOD,                       KEY,      focusnthmon,    {.i  = TAG } }, \
+{ ALTMOD|ShiftMask,             KEY,      tagnthmon,      {.i  = TAG } },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -123,11 +131,11 @@ static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
-static const char *lightinc[] = { "light", "-A", "10", NULL };
-static const char *lightdec[] = { "light", "-U", "10", NULL };
-static const char *volinc[] = { "pulsemixer", "--change-volume", "+5", NULL };
-static const char *voldec[] = { "pulsemixer", "--change-volume", "-5", NULL };
-static const char *volmute[] = { "pulsemixer", "--toggle-mute", NULL };
+static const char *lightinc[] = { "light", "-A", "10;", "pkill", "-RTMIN+2", "dwmblocks", NULL };
+static const char *lightdec[] = { "light", "-U", "10;", "pkill", "-RTMIN+2", "dwmblocks", NULL };
+static const char *volinc[] = { "pulsemixer", "--change-volume", "+5;", "pkill", "-RTMIN+2", "dwmblocks", NULL };
+static const char *voldec[] = { "pulsemixer", "--change-volume", "-5;", "pkill", "-RTMIN+2", "dwmblocks", NULL };
+static const char *volmute[] = { "pulsemixer", "--toggle-mute;", "pkill", "-RTMIN+2", "dwmblocks", NULL };
 static const char *micmute[] = { "amixer", "set", "Capture", "toggle", NULL };
 static const char *screenshot[] = { "scrot", "-s", "-f", "/home/hayden/Photos/screenshots/%Y-%m-%d_%H:%M:%S.png", NULL };
 
@@ -138,6 +146,7 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
     { MODKEY,                       XK_b,      togglebar,      {0} },
+    { MODKEY|ShiftMask,             XK_b,      toggleextrabar, {0} },
     { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
     { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
     { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -147,17 +156,20 @@ static const Key keys[] = {
     { MODKEY,                       XK_Return, zoom,           {0} },
     { MODKEY,                       XK_Tab,    view,           {0} },
     { MODKEY,                       XK_x,      killclient,     {0} },
-    { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-    { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-    { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
     { MODKEY,                       XK_space,  setlayout,      {0} },
     { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+    { MODKEY,                       XK_f,      togglefullscr,  {0} },
     { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
     { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-    { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-    { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-    { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-    { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+    { MODKEY,                       XK_comma,  focusmon,       {.i = +1 } },
+    { MODKEY,                       XK_period, focusmon,       {.i = -1 } },
+    { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = +1 } },
+    { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = -1 } },
+
+    { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+    { MODKEY,                       XK_v,      setlayout,      {.v = &layouts[2]} },
+    { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
+    { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[5]} },
 
     { MODKEY|ShiftMask,             XK_q,      quit,           {1} },
     { MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} }, 
@@ -172,11 +184,15 @@ static const Key keys[] = {
 	/* { MODKEY|ShiftMask,             XK_Right,  tagtonext,      {0} }, */
 	/* { MODKEY|ShiftMask,             XK_Left,   tagtoprev,      {0} }, */
 
-    { 0,          XF86XK_MonBrightnessUp,      spawn,          {.v = lightinc } },
-    { 0,          XF86XK_MonBrightnessDown,    spawn,          {.v = lightdec } },
-    { 0,          XF86XK_AudioRaiseVolume,     spawn,          {.v = volinc } },
-    { 0,          XF86XK_AudioLowerVolume,     spawn,          {.v = voldec } },
-    { 0,          XF86XK_AudioMute,            spawn,          {.v = volmute } },
+    { MODKEY|ShiftMask,             XK_u,      setcfact,       {.f = +0.25} },
+    { MODKEY|ShiftMask,             XK_d,      setcfact,       {.f = -0.25} },
+    { MODKEY|ShiftMask,             XK_r,      setcfact,       {.f =  0.00} },
+
+    { 0,          XF86XK_MonBrightnessUp,      spawn,          SHCMD("light -A 10; pkill -RTMIN+2 dwmblocks") },
+    { 0,          XF86XK_MonBrightnessDown,    spawn,          SHCMD("light -U 10; pkill -RTMIN+2 dwmblocks") },
+    { 0,          XF86XK_AudioRaiseVolume,     spawn,          SHCMD("pulsemixer --change-volume +5; pkill -RTMIN+2 dwmblocks") },
+    { 0,          XF86XK_AudioLowerVolume,     spawn,          SHCMD("pulsemixer --change-volume -5; pkill -RTMIN+2 dwmblocks") },
+    { 0,          XF86XK_AudioMute,            spawn,          SHCMD("pulsemixer --toggle-mute; pkill -RTMIN+2 dwmblocks") },
     { 0,          XF86XK_AudioMicMute,         spawn,          {.v = micmute } },
     { 0,                            XK_Print,  spawn,          {.v = screenshot } },
 
@@ -190,9 +206,6 @@ static const Key keys[] = {
         TAGKEYS(                        XK_8,                      7)
         TAGKEYS(                        XK_9,                      8)
 
-        /* { MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} }, */
-        /* { MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} }, */
-        /* { MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} }, */
         /* { MODKEY|Mod4Mask,              XK_u,      incrgaps,       {.i = +1 } }, */
         /* { MODKEY|Mod4Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } }, */
         /* { MODKEY|Mod4Mask,              XK_i,      incrigaps,      {.i = +1 } }, */
@@ -219,6 +232,9 @@ static const Button buttons[] = {
     { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
     { ClkWinTitle,          0,              Button2,        zoom,           {0} },
     { ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkExBarLeftStatus,   0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkExBarMiddle,       0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkExBarRightStatus,  0,              Button2,        spawn,          {.v = termcmd } },
     { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
     { ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
     { ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },

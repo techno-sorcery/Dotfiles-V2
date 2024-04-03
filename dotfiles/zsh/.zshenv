@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 
-# Main user
-export MAIN_USER="hayden"
+# Misc
+export MAIN_USER="$USER"
+export BG="/home/$USER/Photos/wallpapers/jesus_keys.jpg"
 
 # Programs
 export RISCV=$HOME/.local
@@ -25,5 +26,5 @@ export SAVEHIST=1000
 
 # Paths
 export XDG_DATA_DIRS="/usr/local/share/:/usr/share/:/var/lib/flatpak/exports/share"
-export PATH="$PATH:/home/hayden/.local/bin"
+export PATH="$PATH:/home/$USER/.local/bin"
 export DMENU_PATH="/usr/share/applications"

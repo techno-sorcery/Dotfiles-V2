@@ -1,3 +1,17 @@
 - name: Create .fonts symlink
   file:
-    src: 
+    src: "{{ playbook_dir }}/../.fonts"
+    dest: "~/.fonts"
+    force: true
+    state: link
+  tags:
+    - base
+    - config
+    - fonts
+
+- name: Rebuild font cache
+  shell: "fc-cache -f -v"
+  tags:
+    - base
+    - config
+    - fonts

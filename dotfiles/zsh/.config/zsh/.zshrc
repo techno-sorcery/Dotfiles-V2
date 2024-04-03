@@ -43,7 +43,7 @@ alias d='dirs -v'
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
 
 # Prompt string
-PS1='%B%F{10}%n%f%b:%F{12}%~%f$ '
+PS1='%B%F{10}%n@%m%f%b:%F{12}%~%f$ '
 
 # Autorun
 source "$ZDOTDIR/autorun"
@@ -59,6 +59,7 @@ cdls() {
 # Plugins
 znap source zdharma-continuum/fast-syntax-highlighting
 znap source hlissner/zsh-autopair
+znap source zsh-users/zsh-autosuggestions
 
 source "$ZDOTDIR/plugins/cursor.zsh"
 source "/usr/share/doc/fzf/examples/completion.zsh"
