@@ -187,6 +187,8 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_u,      setcfact,       {.f = +0.25} },
     { MODKEY|ShiftMask,             XK_d,      setcfact,       {.f = -0.25} },
     { MODKEY|ShiftMask,             XK_r,      setcfact,       {.f =  0.00} },
+    
+    { MODKEY,                       XK_r,      spawn,          SHCMD("for i in $(seq 1 25); do pkill -RTMIN+$i dwmblocks; done") },
 
     { 0,          XF86XK_MonBrightnessUp,      spawn,          SHCMD("light -A 10; pkill -RTMIN+2 dwmblocks") },
     { 0,          XF86XK_MonBrightnessDown,    spawn,          SHCMD("light -U 10; pkill -RTMIN+2 dwmblocks") },
