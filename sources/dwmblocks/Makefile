@@ -2,6 +2,7 @@
 
 PREFIX = /usr/local
 CC = gcc
+# CFLAGS = -g
 
 dwmblocks: dwmblocks.o
 	$(CC) dwmblocks.o -lX11 -o dwmblocks

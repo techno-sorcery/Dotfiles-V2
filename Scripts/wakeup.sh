@@ -6,5 +6,4 @@ pkill -RTMIN+9 dwmblocks
 pkill -RTMIN+8 dwmblocks
 pkill -RTMIN+5 dwmblocks
 pkill -RTMIN+4 dwmblocks
-slock
 

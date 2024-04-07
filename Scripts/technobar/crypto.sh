@@ -1,8 +1,11 @@
 #!/bin/bash
 
 # Temp
-price="$(curl -m 5 "rate.sx/link?qFT@1s" | awk '/^avg/ { print $2 } ')"
+btc="$(curl -m 10 "rate.sx/1btc")"
+btc="$(printf "%0.2f" $btc)"
+link="$(curl -m 10 "rate.sx/1link")"
+link="$(printf "%0.2f" $link)"
 
 # Output
-echo 🇨  $price
+echo "💰 BTC $btc, 🇨 LNK $link"
 
