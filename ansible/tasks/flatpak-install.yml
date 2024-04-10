@@ -17,17 +17,12 @@
 - name: Install flatpak GUI extras
   flatpak:
     name:
-      - com.github.corna.Vivado
       - com.github.tchx84.Flatseal
       - com.spotify.Client
-      - com.valvesoftware.Steam
-      - org.inkscape.Inkscape
-      - org.freedesktop.Platform.GL32.nvidia-525-147-05
+      - com.vivaldi.Vivaldi
       - org.kde.krita
       - org.qbittorrent.qBittorrent
       - org.signal.Signal
-      - org.tenacityaudio.Tenacity
-      - us.zoom.Zoom
   tags:
     - flatpak
     - install

@@ -15,7 +15,8 @@ Xft.dpi: 110
 *norm_border: #555555
 
 *sel_fg: #dadada
+/* *sel_bg: #cc0700 */
 *sel_bg: #005577
 *sel_border: #a8a8a8
 
-*borderpx: 3
+*borderpx: 4

@@ -5,6 +5,7 @@
       - ansible
       - atool
       - autoconf
+      - bc
       - curl
       - default-jre
       - ffmpeg
@@ -17,10 +18,8 @@
       - make
       - man
       - ncal
-      - neofetch
       - neovim
       - network-manager
-      - npm
       - pass
       - pipx
       - ssh
@@ -39,15 +38,13 @@
   become: true
   package:
     name:
+      - cowsay
       - dict-gcide
       - dict-wn
       - dictd
-        #- isync
-        #- neomutt
-        #- newsboat
+      - fortune
+      - neofetch
       - orpie
-        #- w3m
-        #- w3m-img
   tags:
     - install
     - cli-extras
@@ -57,8 +54,12 @@
   package:
     name:
       - alsa-utils
+      - arandr
+      - autorandr
+      - compton
       - feh
       - fonts-noto-color-emoji
+      - i3lock
       - libsdl2-image-2.0-0 
       - libsdl2-mixer-2.0-0
       - libsdl2-ttf-2.0-0
@@ -73,7 +74,7 @@
       - libxtst-dev
       - mpv
       - numlockx
-      - picom
+      - pavucontrol
       - pulseaudio
       - pulseaudio-module-bluetooth
       - pulsemixer
@@ -87,10 +88,9 @@
       - xfonts-terminus
       - xinit
       - xinput
-      - xscreensaver
-      - xscreensaver-data-extra
       - xserver-xorg-core
       - xserver-xorg-input-libinput
+      - xss-lock
       - xutils-dev
       - zathura
   tags:

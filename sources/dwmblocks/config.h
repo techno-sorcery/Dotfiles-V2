@@ -6,15 +6,12 @@ static const Block blocks[] = {
 	{1,             "",	"~/Scripts/technobar/cpu.sh",	        1,	    7},
 	{1,             "",	"~/Scripts/technobar/therm.sh",	        2,	    3},
 	{1,             "",	"~/Scripts/technobar/mem.sh",	        2,	    6},
+	{1,             "",	"~/Scripts/technobar/packages.sh",	    600,	10},
+	{1,             "",	"~/Scripts/technobar/disk.sh",	        600,	5},
 	{1,             "",	"~/Scripts/technobar/network.sh",	    5,	    11},
 	{1,             "",	"~/Scripts/technobar/batt.sh",	        5,	    4},
 	{1,             "",	"~/Scripts/technobar/bright.sh",	    0,	    2},
-	{0,             "",	"~/Scripts/technobar/time.sh",	        10,	    1},
-	{0,             "",	"~/Scripts/technobar/extrabar.sh",	    0,	    0},
-	{1,             "",	"~/Scripts/technobar/crypto.sh",	    600,	9},
-	{1,             "",	"~/Scripts/technobar/weather.sh",	    600,	8},
-	{1,             "",	"~/Scripts/technobar/packages.sh",	    600,	10},
-	{1,             "",	"~/Scripts/technobar/disk.sh",	        600,	5},
+	{1,             "",	"~/Scripts/technobar/time.sh",	        10,	    1},
 };
 
 //Sets delimiter between status commands. NULL character ('\0') means no delimiter.
@@ -28,3 +25,6 @@ static char *r_padding = "  ";
 // vim with the following line in your vimrc/init.vim:
 
 // autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
+/*	{0,             "",	"~/Scripts/technobar/extrabar.sh",	    0,	    0},
+	{1,             "",	"~/Scripts/technobar/crypto.sh",	    600,	9},
+	{1,             "",	"~/Scripts/technobar/weather.sh",	    600,	8},*/

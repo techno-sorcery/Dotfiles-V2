@@ -29,13 +29,15 @@
         mode: 0755
       loop:
         - "Documents"
-        - "Documents/pdfs"
+        - "Documents/execs"
         - "Downloads"
         - "Games"
         - "Git"
         - "Media"
+        - "Media/books"
         - "Media/movies"
         - "Media/music"
+        - "Media/pdfs"
         - "Media/tv"
         - "Photos"
         - "Photos/screenshots"

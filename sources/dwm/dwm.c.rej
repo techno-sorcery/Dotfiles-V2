@@ -1,38 +1,38 @@
 --- dwm.c
 +++ dwm.c
-@@ -656,6 +673,7 @@ createmon(void)
+@@ -639,7 +622,6 @@ createmon(void)
  	m->nmaster = nmaster;
  	m->showbar = showbar;
  	m->topbar = topbar;
-+	m->extrabar = extrabar;
+-	m->extrabar = extrabar;
  	m->lt[0] = &layouts[0];
  	m->lt[1] = &layouts[1 % LENGTH(layouts)];
  	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
-@@ -2041,8 +2093,26 @@ updatesizehints(Client *c)
+@@ -1991,26 +1939,8 @@ updatesizehints(Client *c)
  void
  updatestatus(void)
  {
--	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
-+	char text[768];
-+	if (!gettextprop(root, XA_WM_NAME, text, sizeof(text))) {
+-	char text[768];
+-	if (!gettextprop(root, XA_WM_NAME, text, sizeof(text))) {
++	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
  		strcpy(stext, "dwm-"VERSION);
-+		estextl[0] = '\0';
-+		estextr[0] = '\0';
-+	} else {
-+		char *l = strchr(text, statussep);
-+		if (l) {
-+			*l = '\0'; l++;
-+			strncpy(estextl, l, sizeof(estextl) - 1);
-+		} else
-+			estextl[0] = '\0';
-+		char *r = strchr(estextl, statussep);
-+		if (r) {
-+			*r = '\0'; r++;
-+			strncpy(estextr, r, sizeof(estextr) - 1);
-+		} else
-+			estextr[0] = '\0';
-+		strncpy(stext, text, sizeof(stext) - 1);
-+	}
+-		estextl[0] = '\0';
+-		estextr[0] = '\0';
+-	} else {
+-		char *l = strchr(text, statussep);
+-		if (l) {
+-			*l = '\0'; l++;
+-			strncpy(estextl, l, sizeof(estextl) - 1);
+-		} else
+-			estextl[0] = '\0';
+-		char *r = strchr(estextl, statussep);
+-		if (r) {
+-			*r = '\0'; r++;
+-			strncpy(estextr, r, sizeof(estextr) - 1);
+-		} else
+-			estextr[0] = '\0';
+-		strncpy(stext, text, sizeof(stext) - 1);
+-	}
  	drawbar(selmon);
  }
  

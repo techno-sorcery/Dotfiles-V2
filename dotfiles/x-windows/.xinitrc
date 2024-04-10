@@ -7,14 +7,14 @@
 # invoke global X session script
 #. /etc/X11/Xsession
 
-picom -b &
-feh --bg-fill $BG & 
-xrdb -merge  ~/.Xresources &
-numlockx on &
-setxkbmap -option caps:swapescape &
+compton --vsync opengl-swc --backend glx &
+feh --bg-fill $BG
+xss-lock -- i3lock -i /home/$USER/Photos/wallpapers/ibm.png -t &
+xrdb -merge  ~/.Xresources
+numlockx on
+setxkbmap -option caps:swapescape
 dwmblocks &
-xscreensaver --no-splash &
-st -t st -e sh -c 'fortune ~/Documents/biblefortune/bible | cowsay; $SHELL' &
+st &
 exec dbus-run-session -- dwm
 
 # xinput set-prop "Kensington ORBIT WIRELESS TB Mouse" "libinput Middle Emulation Enabled" 1 &
