@@ -1,38 +1,20 @@
 --- dwm.c
 +++ dwm.c
-@@ -639,7 +622,6 @@ createmon(void)
- 	m->nmaster = nmaster;
- 	m->showbar = showbar;
- 	m->topbar = topbar;
--	m->extrabar = extrabar;
- 	m->lt[0] = &layouts[0];
- 	m->lt[1] = &layouts[1 % LENGTH(layouts)];
- 	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
-@@ -1991,26 +1939,8 @@ updatesizehints(Client *c)
- void
- updatestatus(void)
- {
--	char text[768];
--	if (!gettextprop(root, XA_WM_NAME, text, sizeof(text))) {
-+	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
- 		strcpy(stext, "dwm-"VERSION);
--		estextl[0] = '\0';
--		estextr[0] = '\0';
--	} else {
--		char *l = strchr(text, statussep);
--		if (l) {
--			*l = '\0'; l++;
--			strncpy(estextl, l, sizeof(estextl) - 1);
--		} else
--			estextl[0] = '\0';
--		char *r = strchr(estextl, statussep);
--		if (r) {
--			*r = '\0'; r++;
--			strncpy(estextr, r, sizeof(estextr) - 1);
--		} else
--			estextr[0] = '\0';
--		strncpy(stext, text, sizeof(stext) - 1);
--	}
- 	drawbar(selmon);
- }
- 
+@@ -207,6 +209,9 @@ static void setup(void);
+ static void seturgent(Client *c, int urg);
+ static void showhide(Client *c);
+ static void sigchld(int unused);
++#ifdef XINERAMA
++static void sortscreens(XineramaScreenInfo *screens, int n);
++#endif /* XINERAMA */
+ static void spawn(const Arg *arg);
+ static void tag(const Arg *arg);
+ static void tagmon(const Arg *arg);
+@@ -1888,6 +1911,7 @@ updategeom(void)
+ 				memcpy(&unique[j++], &info[i], sizeof(XineramaScreenInfo));
+ 		XFree(info);
+ 		nn = j;
++		sortscreens(unique, nn);
+ 		if (n <= nn) { /* new monitors available */
+ 			for (i = 0; i < (nn - n); i++) {
+ 				for (m = mons; m && m->next; m = m->next);

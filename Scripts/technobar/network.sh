@@ -5,7 +5,7 @@ ssid="$(nmcli con show | awk '/wlp4s0/ {print $1}')"
 
 if [[ ${#ssid} == 0 ]] ; then
     icon1="🚫"
-    ssid="d"
+    ssid=""
 else
     icon1="🛜"
 fi

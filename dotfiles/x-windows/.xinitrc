@@ -7,14 +7,16 @@
 # invoke global X session script
 #. /etc/X11/Xsession
 
-compton --vsync opengl-swc --backend glx &
-feh --bg-fill $BG
+# compton --vsync opengl-swc --backend glx &
+hsetroot -tile $BG
 xss-lock -- i3lock -i /home/$USER/Photos/wallpapers/ibm.png -t &
 xrdb -merge  ~/.Xresources
 numlockx on
 setxkbmap -option caps:swapescape
 dwmblocks &
 st &
+# xcompmgr &
+# sleep 0.2
 exec dbus-run-session -- dwm
 
 # xinput set-prop "Kensington ORBIT WIRELESS TB Mouse" "libinput Middle Emulation Enabled" 1 &

@@ -2,10 +2,9 @@
 
 # Misc
 export MAIN_USER="$USER"
-export BG="/home/$USER/Photos/wallpapers/jesus_keys.jpg"
+export BG="/home/technomancer/Photos/wallpapers/ImageHandler-8.png"
 
 # Programs
-export RISCV=$HOME/.local
 export EDITOR="nvim"
 export TERM="st-256color"
 export PAGER='less -SsMJ +Gg -x4 -z-2 --use-color -DP15.12 -DS0.11 -DR0.1 -Dd205 -Du75'

@@ -1525,9 +1525,6 @@ tsetchar(Rune u, const Glyph *attr, int x, int y)
 	term.line[y][x] = *attr;
 	term.line[y][x].u = u;
 	term.line[y][x].mode |= ATTR_SET;
-
-	if (isboxdraw(u))
-		term.line[y][x].mode |= ATTR_BOXDRAW;
 }
 
 void

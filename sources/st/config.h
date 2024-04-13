@@ -76,18 +76,6 @@ static unsigned int blinktimeout = 800;
 static unsigned int cursorthickness = 2;
 
 /*
- * 1: render most of the lines/blocks characters without using the font for
- *    perfect alignment between cells (U2500 - U259F except dashes/diagonals).
- *    Bold affects lines thickness if boxdraw_bold is not 0. Italic is ignored.
- * 0: disable (render all U25XX glyphs normally from the font).
- */
-const int boxdraw = 0;
-const int boxdraw_bold = 0;
-
-/* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
-const int boxdraw_braille = 0;
-
-/*
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
  * it
  */
@@ -114,7 +102,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 4;
 
 /* bg opacity */
-float alpha = 0.75;
+float alpha = 0.60;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -144,7 +132,7 @@ static const char *colorname[] = {
 	"#cccccc",
 	"#555555",
 	"gray90", /* default foreground colour */
-	"black", /* default background colour */
+	"#000000", /* default background colour */
 };
 
 
@@ -153,7 +141,7 @@ static const char *colorname[] = {
  * foreground, background, cursor, reverse cursor
  */
 unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
+unsigned int defaultbg = 16;
 unsigned int defaultcs = 7;
 static unsigned int defaultrcs = 7;
 
@@ -192,6 +180,43 @@ static unsigned int defaultattr = 11;
  * modifier, set to 0 to not use it.
  */
 static uint forcemousemod = ShiftMask;
+
+/*
+ * Xresources preferences to load at startup
+ */
+ResourcePref resources[] = {
+		{ "alpha",        FLOAT,  &alpha },
+		{ "background",   STRING,  &colorname[256] },
+		{ "bellvolume",   INTEGER, &bellvolume },
+		{ "blinktimeout", INTEGER, &blinktimeout },
+		{ "borderpx",     INTEGER, &borderpx },
+		{ "chscale",      FLOAT,   &chscale },
+		{ "color0",       STRING,  &colorname[0] },
+		{ "color1",       STRING,  &colorname[1] },
+		{ "color10",      STRING,  &colorname[10] },
+		{ "color11",      STRING,  &colorname[11] },
+		{ "color12",      STRING,  &colorname[12] },
+		{ "color13",      STRING,  &colorname[13] },
+		{ "color14",      STRING,  &colorname[14] },
+		{ "color15",      STRING,  &colorname[15] },
+		{ "color2",       STRING,  &colorname[2] },
+		{ "color3",       STRING,  &colorname[3] },
+		{ "color4",       STRING,  &colorname[4] },
+		{ "color5",       STRING,  &colorname[5] },
+		{ "color6",       STRING,  &colorname[6] },
+		{ "color7",       STRING,  &colorname[7] },
+		{ "color8",       STRING,  &colorname[8] },
+		{ "color9",       STRING,  &colorname[9] },
+		{ "cursorColor",  STRING,  &colorname[258] },
+		{ "cwscale",      FLOAT,   &cwscale },
+		{ "font",         STRING,  &font },
+		{ "foreground",   STRING,  &colorname[257] },
+		{ "maxlatency",   INTEGER, &maxlatency },
+		{ "minlatency",   INTEGER, &minlatency },
+		{ "shell",        STRING,  &shell },
+		{ "tabspaces",    INTEGER, &tabspaces },
+		{ "termname",     STRING,  &termname },
+};
 
 /*
  * Internal mouse shortcuts.

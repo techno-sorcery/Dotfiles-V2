@@ -1,0 +1,5 @@
+! Display
+Xft.dpi: 100
+
+! dwm appearance
+dwm*statmonval: 2

@@ -1,0 +1,5 @@
+{
+  "keyMappings": "# Insert your preferred key mappings here.\nunmap J\nunmap K\nmap J nextTab\nmap K previousTab",
+  "scrollStepSize": 80,
+  "settingsVersion": "2.1.2"
+}
