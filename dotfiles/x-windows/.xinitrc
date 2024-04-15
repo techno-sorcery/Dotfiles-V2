@@ -7,7 +7,7 @@
 # invoke global X session script
 #. /etc/X11/Xsession
 
-# compton --vsync opengl-swc --backend glx &
+compton --vsync opengl-swc --backend glx &
 hsetroot -tile $BG
 xss-lock -- i3lock -i /home/$USER/Photos/wallpapers/ibm.png -t &
 xrdb -merge  ~/.Xresources

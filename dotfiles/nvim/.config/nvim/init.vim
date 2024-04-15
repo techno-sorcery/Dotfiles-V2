@@ -8,7 +8,9 @@ augroup numbertoggle
 nnoremap <Space> <NOP>
 let mapleader =" "      " Set leader to spacebar
 map <leader>g :Goyo \| set spell \| set linebreak<CR>
-map <leader>p :PlugInstall<cr>
+map <leader>z : silent execute '!zathura %:r.pdf & '
 source ~/.config/nvim/lua_init.lua
 source /usr/share/doc/fzf/examples/fzf.vim
 autocmd! User GoyoLeave nested | colorscheme cool | set nospell
+autocmd BufWritePost *.tex silent! execute "!pdflatex % >/dev/null 2>&1" | redraw!
+

@@ -61,8 +61,8 @@ int allowwindowops = 0;
  * near minlatency, but it waits longer for slow updates to avoid partial draw.
  * low minlatency will tear/flicker more, as it can "detect" idle too early.
  */
-static double minlatency = 8;
-static double maxlatency = 33;
+static double minlatency = 2;
+static double maxlatency = 15;
 
 /*
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
@@ -132,7 +132,7 @@ static const char *colorname[] = {
 	"#cccccc",
 	"#555555",
 	"gray90", /* default foreground colour */
-	"#000000", /* default background colour */
+	"black", /* default background colour */
 };
 
 
@@ -180,47 +180,6 @@ static unsigned int defaultattr = 11;
  * modifier, set to 0 to not use it.
  */
 static uint forcemousemod = ShiftMask;
-
-/*
- * Xresources preferences to load at startup
- */
-ResourcePref resources[] = {
-		{ "alpha",        FLOAT,  &alpha },
-		{ "background",   STRING,  &colorname[256] },
-		{ "bellvolume",   INTEGER, &bellvolume },
-		{ "blinktimeout", INTEGER, &blinktimeout },
-		{ "borderpx",     INTEGER, &borderpx },
-		{ "chscale",      FLOAT,   &chscale },
-		{ "color0",       STRING,  &colorname[0] },
-		{ "color1",       STRING,  &colorname[1] },
-		{ "color10",      STRING,  &colorname[10] },
-		{ "color11",      STRING,  &colorname[11] },
-		{ "color12",      STRING,  &colorname[12] },
-		{ "color13",      STRING,  &colorname[13] },
-		{ "color14",      STRING,  &colorname[14] },
-		{ "color15",      STRING,  &colorname[15] },
-		{ "color2",       STRING,  &colorname[2] },
-		{ "color3",       STRING,  &colorname[3] },
-		{ "color4",       STRING,  &colorname[4] },
-		{ "color5",       STRING,  &colorname[5] },
-		{ "color6",       STRING,  &colorname[6] },
-		{ "color7",       STRING,  &colorname[7] },
-		{ "color8",       STRING,  &colorname[8] },
-		{ "color9",       STRING,  &colorname[9] },
-		{ "cursorColor",  STRING,  &colorname[258] },
-		{ "cwscale",      FLOAT,   &cwscale },
-		{ "defaultbg",    INTEGER, &defaultbg },
-		{ "defaultcs",    INTEGER, &defaultcs },
-		{ "defaultfg",    INTEGER, &defaultfg },
-		{ "defaultrcs",   INTEGER, &defaultrcs },
-		{ "font",         STRING,  &font },
-		{ "foreground",   STRING,  &colorname[257] },
-		{ "maxlatency",   INTEGER, &maxlatency },
-		{ "minlatency",   INTEGER, &minlatency },
-		{ "shell",        STRING,  &shell },
-		{ "tabspaces",    INTEGER, &tabspaces },
-		{ "termname",     STRING,  &termname },
-};
 
 /*
  * Internal mouse shortcuts.

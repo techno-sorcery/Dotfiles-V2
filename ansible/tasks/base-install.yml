@@ -43,8 +43,12 @@
       - dict-wn
       - dictd
       - fortune
+      - gdb
       - neofetch
       - orpie
+      - texlive-full
+      - valgrind
+      - wine
   tags:
     - install
     - cli-extras

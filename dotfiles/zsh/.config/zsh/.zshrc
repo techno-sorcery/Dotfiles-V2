@@ -16,7 +16,7 @@ source "$ZDOTDIR/plugins/romkatv/gitstatus/gitstatus.prompt.zsh"
 
 
 # Autosuggest bindings
-# bindkey '^L' autosuggest-accept
+bindkey '^[[Z' autosuggest-accept
 
 
 # Vim bindings

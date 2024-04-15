@@ -1,14 +1,17 @@
 --- x.c
 +++ x.c
-@@ -2102,6 +2167,11 @@ run:
+@@ -1488,12 +1481,8 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
+ 	r.width = width;
+ 	XftDrawSetClipRectangles(xw.draw, winx, winy, &r, 1);
  
- 	setlocale(LC_CTYPE, "");
- 	XSetLocaleModifiers("");
-+
-+	if(!(xw.dpy = XOpenDisplay(NULL)))
-+		die("Can't open display\n");
-+
-+	config_init();
- 	cols = MAX(cols, 1);
- 	rows = MAX(rows, 1);
- 	tnew(cols, rows);
+-	if (base.mode & ATTR_BOXDRAW) {
+-		drawboxes(winx, winy, width / len, win.ch, fg, bg, specs, len);
+-	} else {
+-		/* Render the glyphs. */
+-		XftDrawGlyphFontSpec(xw.draw, fg, specs, len);
+-	}
++	/* Render the glyphs. */
++	XftDrawGlyphFontSpec(xw.draw, fg, specs, len);
+ 
+ 	/* Render underline and strikethrough. */
+ 	if (base.mode & ATTR_UNDERLINE) {

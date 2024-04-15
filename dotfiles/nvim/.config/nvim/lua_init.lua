@@ -70,17 +70,17 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Config and use lazy
 require("lazy").setup({
-    -- "ervandew/supertab",                    -- Tab complete
-    "VonHeikemen/lsp-zero.nvim",
-    "neovim/nvim-lspconfig",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    -- "hrsh7th/cmp-cmdline",
-    "hrsh7th/nvim-cmp",
-    "L3MON4D3/LuaSnip",
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "ervandew/supertab",                    -- Tab complete
+    -- "VonHeikemen/lsp-zero.nvim",
+    -- "neovim/nvim-lspconfig",
+    -- "hrsh7th/cmp-nvim-lsp",
+    -- "hrsh7th/cmp-buffer",
+    -- "hrsh7th/cmp-path",
+    -- -- "hrsh7th/cmp-cmdline",
+    -- "hrsh7th/nvim-cmp",
+    -- "L3MON4D3/LuaSnip",
+    -- "williamboman/mason.nvim",
+    -- "williamboman/mason-lspconfig.nvim",
 
     "junegunn/goyo.vim",                    -- Comfortable formatting
     "lukas-reineke/indent-blankline.nvim",  -- Indentation lines
@@ -92,7 +92,15 @@ require("lazy").setup({
     "tpope/vim-surround",                   -- Change parentheses/quotes/etc
     "vim-airline/vim-airline",              -- Improved status bar
     "windwp/nvim-autopairs",                -- Pair parentheses and brackets
-})
+},
+
+{
+  "lervag/vimtex",
+  init = function()
+    -- Use init for configuration, don't use the more common "config".
+  end
+}
+)
 
 
 -- Set up nvim-autopairs
@@ -116,92 +124,92 @@ vim.cmd('autocmd BufEnter * set formatoptions-=cro')
 vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro')
 
 
--- Setup LSP
-local lsp_zero = require('lsp-zero')
+-- -- Setup LSP
+-- local lsp_zero = require('lsp-zero')
 
-lsp_zero.on_attach(function(client, bufnr)
-    -- see :help lsp-zero-keybindings
-    -- to learn the available actions
-    lsp_zero.default_keymaps({buffer = bufnr})
-end)
+-- lsp_zero.on_attach(function(client, bufnr)
+--     -- see :help lsp-zero-keybindings
+--     -- to learn the available actions
+--     lsp_zero.default_keymaps({buffer = bufnr})
+-- end)
 
-require('mason').setup({})
-require('mason-lspconfig').setup({
-    ensure_installed = {},
-    handlers = {
-        function(server_name)
-            require('lspconfig')[server_name].setup({})
-        end,
-    },
-})
-
-
--- Setup cmp-nvim
-
--- Icon arrau
-local kind_icons = {
-    Text = "",
-    Method = "󰆧",
-    Function = "󰊕",
-    Constructor = "",
-    Field = "󰇽",
-    Variable = "󰂡",
-    Class = "󰠱",
-    Interface = "",
-    Module = "",
-    Property = "󰜢",
-    Unit = "",
-    Value = "󰎠",
-    Enum = "",
-    Keyword = "󰌋",
-    Snippet = "",
-    Color = "󰏘",
-    File = "󰈙",
-    Reference = "",
-    Folder = "󰉋",
-    EnumMember = "",
-    Constant = "󰏿",
-    Struct = "",
-    Event = "",
-    Operator = "󰆕",
-    TypeParam = "󰅲",
-}
+-- require('mason').setup({})
+-- require('mason-lspconfig').setup({
+--     ensure_installed = {},
+--     handlers = {
+--         function(server_name)
+--             require('lspconfig')[server_name].setup({})
+--         end,
+--     },
+-- })
 
 
-local cmp = require('cmp')
-local cmp_format = require('lsp-zero').cmp_format({details = true})
+-- -- Setup cmp-nvim
 
-cmp.setup({
-    sources = {
-        {name = 'nvim_lsp'},
-        {name = 'buffer'},
-        {name = 'path'},
-    },
+-- -- Icon arrau
+-- local kind_icons = {
+--     Text = "",
+--     Method = "󰆧",
+--     Function = "󰊕",
+--     Constructor = "",
+--     Field = "󰇽",
+--     Variable = "󰂡",
+--     Class = "󰠱",
+--     Interface = "",
+--     Module = "",
+--     Property = "󰜢",
+--     Unit = "",
+--     Value = "󰎠",
+--     Enum = "",
+--     Keyword = "󰌋",
+--     Snippet = "",
+--     Color = "󰏘",
+--     File = "󰈙",
+--     Reference = "",
+--     Folder = "󰉋",
+--     EnumMember = "",
+--     Constant = "󰏿",
+--     Struct = "",
+--     Event = "",
+--     Operator = "󰆕",
+--     TypeParam = "󰅲",
+-- }
 
-    mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    }),
 
-    formatting = {
-        format = function(entry, vim_item)
-            -- Kind icons
-            vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
-            -- Source
-            vim_item.menu = ({
-                buffer = "[Buffer]",
-                nvim_lsp = "[LSP]",
-                luasnip = "[LuaSnip]",
-                nvim_lua = "[Lua]",
-                latex_symbols = "[LaTeX]",
-            })[entry.source.name]
-            return vim_item
-        end
-    },
+-- local cmp = require('cmp')
+-- local cmp_format = require('lsp-zero').cmp_format({details = true})
 
-    --- (Optional) Show source name in completion menu
-    -- formatting = cmp_format,
-})
+-- cmp.setup({
+--     sources = {
+--         {name = 'nvim_lsp'},
+--         {name = 'buffer'},
+--         {name = 'path'},
+--     },
+
+--     mapping = cmp.mapping.preset.insert({
+--         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+--         ['<C-f>'] = cmp.mapping.scroll_docs(4),
+--         ['<C-Space>'] = cmp.mapping.complete(),
+--         ['<C-e>'] = cmp.mapping.abort(),
+--         ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+--     }),
+
+--     formatting = {
+--         format = function(entry, vim_item)
+--             -- Kind icons
+--             vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
+--             -- Source
+--             vim_item.menu = ({
+--                 buffer = "[Buffer]",
+--                 nvim_lsp = "[LSP]",
+--                 luasnip = "[LuaSnip]",
+--                 nvim_lua = "[Lua]",
+--                 latex_symbols = "[LaTeX]",
+--             })[entry.source.name]
+--             return vim_item
+--         end
+--     },
+
+--     --- (Optional) Show source name in completion menu
+--     -- formatting = cmp_format,
+-- })

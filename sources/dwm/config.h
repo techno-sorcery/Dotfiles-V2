@@ -16,7 +16,6 @@ static int user_bh                  = 1; /* 2 is the default spacing around the 
 static char font[]                  = "Terminess Nerd Font:size=12";
 static char rofifont[]              = "Terminus 10";
 static const char *fonts[]          = { "Terminus:size=10", "Noto Color Emoji:size=9"};
-/* static const char dmenufont[]       = "Terminus:size=10"; */
 
 static char norm_fg[]               = "#dadada";
 static char norm_bg[]               = "#0a0a0a";
@@ -46,7 +45,7 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
     /* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-    { "st",      NULL,     NULL,           0,         0,          1,           0,        -1 },
+    { "st-256color",      NULL,     NULL,           0,         0,          1,           0,        -1 },
     { NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 

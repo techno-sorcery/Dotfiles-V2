@@ -3,3 +3,4 @@ Xft.dpi: 100
 
 ! dwm appearance
 dwm*statmonval: 2
+*user_bh: 2

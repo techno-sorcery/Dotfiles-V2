@@ -29,7 +29,7 @@ dwm*gappiv: 6
 
 
 ! st appearance
-st*alpha: 0.60
-st*borderpx: 4
-st*minlatency: 2
-st*maxlatency: 15
+/* st*alpha: 0.60 */
+/* st*borderpx: 4 */
+/* st*minlatency: 2 */
+/* st*maxlatency: 15 */
