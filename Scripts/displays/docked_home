@@ -2,7 +2,7 @@
 Xft.dpi: 90
 
 ! dwm appearance
-dwm*statmonval: 2
+dwm*statmonval: 1
 *user_bh: 2
 
 ! rofi

@@ -1,5 +1,5 @@
 " Constants
-hi Constant ctermfg=171
+hi Constant ctermfg = "#d75fff"
 hi String ctermfg=215
 
 " Statement

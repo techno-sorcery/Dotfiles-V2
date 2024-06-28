@@ -21,6 +21,7 @@
       - com.spotify.Client
       - com.vivaldi.Vivaldi
       - org.kde.krita
+      - org.tenacityaudio.Tenacity
       - org.qbittorrent.qBittorrent
       - org.signal.Signal
   tags:

@@ -20,6 +20,7 @@
       - ncal
       - neovim
       - network-manager
+      - p7zip-full
       - pass
       - pipx
       - ssh
@@ -28,6 +29,7 @@
       - tree
       - unzip
       - wget
+      - xclip
       - zsh
   tags:
     - base
@@ -44,8 +46,10 @@
       - dictd
       - fortune
       - gdb
+      - gnuplot
       - neofetch
       - orpie
+      - pandoc
       - texlive-full
       - valgrind
       - wine
@@ -89,6 +93,7 @@
       - x11-xkb-utils 
       - x11-xserver-utils
       - xcb 
+      - xcompmgr
       - xfonts-terminus
       - xinit
       - xinput

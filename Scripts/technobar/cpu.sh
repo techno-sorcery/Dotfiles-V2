@@ -10,11 +10,12 @@ if [[ ${#perc} -lt 4 ]] ; then
 fi
 
 # Clk
-clk="$(awk '/MHz/{ temp+=$4; n++ } END{ printf("%f\n", temp/n) }' /proc/cpuinfo | cut -d "." -f 1)"
-fclk="$(echo "scale=1; $clk/1000" | bc)"
+# clk="$(awk '/MHz/{ temp+=$4; n++ } END{ printf("%f\n", temp/n) }' /proc/cpuinfo | cut -d "." -f 1)"
+# fclk="$(echo "scale=1; $clk/1000" | bc)"
 
-if [[ ${#fclk} -lt 3 ]] ; then
-    fclk="0$fclk"
-fi
+# if [[ ${#fclk} -lt 3 ]] ; then
+#     fclk="0$fclk"
+# fi
 
-echo "$icon1 $perc%, $fclk GHz"
+# echo "$icon1 $perc%, $fclk GHz"
+echo "$icon1 $perc%"

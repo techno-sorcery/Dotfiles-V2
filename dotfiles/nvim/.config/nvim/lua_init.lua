@@ -1,6 +1,9 @@
 -- Basic config
+
+-- vim.opt.termguicolors = true
 vim.opt.number = true                   -- Show line number
 vim.opt.cul = true                      -- Show cursor line
+
 -- vim.opt.foldmethod = "indent"           -- Fold matching indent levels
 vim.opt.lazyredraw = true               -- Wait to redraw screen
 vim.cmd [[colorscheme cool]]            -- Set theme to custom
@@ -50,13 +53,13 @@ vim.g['airline_theme'] = "codedark"                 -- Use VSCode dark theme
 
 
 -- SuperTab
-vim.g['SuperTabDefaultCompletionType'] = "context"  -- SuperTab completion type
+-- vim.g['SuperTabDefaultCompletionType'] = "context"  -- SuperTab completion type
 
 
 -- Bootstrap lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
+   vim.fn.system({
         "git",
         "clone",
         "--filter=blob:none",
@@ -70,18 +73,33 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Config and use lazy
 require("lazy").setup({
-    "ervandew/supertab",                    -- Tab complete
-    -- "VonHeikemen/lsp-zero.nvim",
-    -- "neovim/nvim-lspconfig",
-    -- "hrsh7th/cmp-nvim-lsp",
-    -- "hrsh7th/cmp-buffer",
-    -- "hrsh7th/cmp-path",
-    -- -- "hrsh7th/cmp-cmdline",
-    -- "hrsh7th/nvim-cmp",
-    -- "L3MON4D3/LuaSnip",
-    -- "williamboman/mason.nvim",
-    -- "williamboman/mason-lspconfig.nvim",
 
+    -- Treesitter
+    -- "nvim-treesitter/nvim-treesitter",
+    -- "hiphish/rainbow-delimiters.nvim",
+
+    -- Lsp stuff
+    "VonHeikemen/lsp-zero.nvim",
+    "neovim/nvim-lspconfig",
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+
+    -- Autocomplete
+    "hrsh7th/nvim-cmp",
+    "onsails/lspkind.nvim",
+    "hrsh7th/cmp-nvim-lsp",             -- LSP autocomplete source
+    "hrsh7th/cmp-buffer",               -- Buffer autocomplete source
+    "hrsh7th/cmp-path",                 -- Filepath autocomplete source
+    "saadparwaiz1/cmp_luasnip",         -- LuaSnip autocomplete source
+    "hrsh7th/cmp-calc",                 -- Calculator autocomplete source
+    "f3fora/cmp-spell",                 -- Spell suggestion autocomplete source
+
+    -- Snippets
+    "L3MON4D3/LuaSnip",                 -- Snippet plugin
+    "rafamadriz/friendly-snippets",     -- Snippets for common languages
+
+    -- Misc
+    "brenoprata10/nvim-highlight-colors",   -- Color previews
     "junegunn/goyo.vim",                    -- Comfortable formatting
     "lukas-reineke/indent-blankline.nvim",  -- Indentation lines
     "mg979/vim-visual-multi",               -- Multi-cursor editing
@@ -92,15 +110,34 @@ require("lazy").setup({
     "tpope/vim-surround",                   -- Change parentheses/quotes/etc
     "vim-airline/vim-airline",              -- Improved status bar
     "windwp/nvim-autopairs",                -- Pair parentheses and brackets
-},
+})
 
-{
-  "lervag/vimtex",
-  init = function()
-    -- Use init for configuration, don't use the more common "config".
-  end
+
+-- Set up nvim highlight colors
+require("nvim-highlight-colors").setup {
+	---Render style
+	render = 'virtual',
+	virtual_symbol = '⯀',
+
+	---Set virtual symbol position()
+	virtual_symbol_position = 'inline',
+	enable_hex = true,
+	enable_short_hex = true,
+	enable_rgb = true,
+	enable_hsl = true,
+	enable_var_usage = true,
+	enable_named_colors = true,
+	enable_tailwind = false,
+
+	---Set custom colors
+	custom_colors = {
+		{ label = '%-%-theme%-primary%-color', color = '#0f1219' },
+		{ label = '%-%-theme%-secondary%-color', color = '#5a5d64' },
+	},
+
+    exclude_filetypes = {},
+    exclude_buftypes = {}
 }
-)
 
 
 -- Set up nvim-autopairs
@@ -124,92 +161,117 @@ vim.cmd('autocmd BufEnter * set formatoptions-=cro')
 vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro')
 
 
--- -- Setup LSP
--- local lsp_zero = require('lsp-zero')
+-- Setup LSP zero
+local lsp_zero = require('lsp-zero')
 
--- lsp_zero.on_attach(function(client, bufnr)
---     -- see :help lsp-zero-keybindings
---     -- to learn the available actions
---     lsp_zero.default_keymaps({buffer = bufnr})
--- end)
+lsp_zero.on_attach(function(client, bufnr)
+    -- see :help lsp-zero-keybindings
+    -- to learn the available actions
+    lsp_zero.default_keymaps({buffer = bufnr})
+end)
 
--- require('mason').setup({})
--- require('mason-lspconfig').setup({
---     ensure_installed = {},
---     handlers = {
---         function(server_name)
---             require('lspconfig')[server_name].setup({})
---         end,
+-- Error icons
+lsp_zero.set_sign_icons({
+    error = 'X',
+    warn = '!',
+    hint = '⚑',
+    info = 'i',
+})
+
+
+-- Setup LSP mason package manager
+require('mason').setup({})
+require('mason-lspconfig').setup({
+    ensure_installed = {},
+    handlers = {
+        function(server_name)
+            require('lspconfig')[server_name].setup({})
+        end,
+    },
+})
+
+local cmp = require('cmp')
+local cmp_action = require('lsp-zero').cmp_action()
+require('luasnip.loaders.from_vscode').lazy_load()
+
+cmp.setup({
+
+    -- LSP sources
+    sources = {
+        {name = 'nvim_lsp'},
+        {name = 'path'},
+        {name = 'calc'},
+        {name = 'luasnip', keyword_length = 2},
+        {name = 'buffer', keyword_length = 3},
+        {
+            name = "spell",
+            option = {
+                keep_all_entries = false,
+                enable_in_context = function()
+                    return true
+                end,
+                preselect_correct_word = true,
+            },
+        },
+    },
+
+    completion = {
+        autocomplete = false;
+    };
+
+    -- Autocomplete keybinds
+    mapping = cmp.mapping.preset.insert({
+
+        -- Tab autocomplete
+        ['<Tab>'] = cmp_action.tab_complete(),
+        ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
+        ['<CR>'] = cmp.mapping.confirm({select = false}),
+    }),
+
+    -- Snippets support
+    snippet = {
+        expand = function(args)
+          require('luasnip').lsp_expand(args.body)
+        end,
+    },
+
+    -- Completion menu formatting
+    formatting = {
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+
+            -- lsp-kind formatting
+            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 32 })(entry, vim_item)
+            local strings = vim.split(kind.kind, "%s", { trimempty = true })
+            kind.kind = " " .. (strings[1] or "") .. " "
+            kind.menu = "    (" .. (strings[2] or "") .. ")"
+
+            return kind
+        end,
+    },
+})
+
+
+-- Autosuggest menu colors
+vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { bg='NONE', strikethrough=true, fg='#808080' })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg='NONE', fg='#569CD6' })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link='CmpIntemAbbrMatch' })
+vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { bg='NONE', fg='#9CDCFE' })
+vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { link='CmpItemKindVariable' })
+vim.api.nvim_set_hl(0, 'CmpItemKindText', { link='CmpItemKindVariable' })
+vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { bg='NONE', fg='#C586C0' })
+vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { link='CmpItemKindFunction' })
+vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { bg='NONE', fg='#D4D4D4' })
+vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link='CmpItemKindKeyword' })
+vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link='CmpItemKindKeyword' })
+
+
+-- require'nvim-treesitter.configs'.setup {
+--     ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+--     sync_install = false,
+--     auto_install = true,
+
+--     highlight = {
+--         enable = true,
 --     },
--- })
-
-
--- -- Setup cmp-nvim
-
--- -- Icon arrau
--- local kind_icons = {
---     Text = "",
---     Method = "󰆧",
---     Function = "󰊕",
---     Constructor = "",
---     Field = "󰇽",
---     Variable = "󰂡",
---     Class = "󰠱",
---     Interface = "",
---     Module = "",
---     Property = "󰜢",
---     Unit = "",
---     Value = "󰎠",
---     Enum = "",
---     Keyword = "󰌋",
---     Snippet = "",
---     Color = "󰏘",
---     File = "󰈙",
---     Reference = "",
---     Folder = "󰉋",
---     EnumMember = "",
---     Constant = "󰏿",
---     Struct = "",
---     Event = "",
---     Operator = "󰆕",
---     TypeParam = "󰅲",
 -- }
-
-
--- local cmp = require('cmp')
--- local cmp_format = require('lsp-zero').cmp_format({details = true})
-
--- cmp.setup({
---     sources = {
---         {name = 'nvim_lsp'},
---         {name = 'buffer'},
---         {name = 'path'},
---     },
-
---     mapping = cmp.mapping.preset.insert({
---         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
---         ['<C-f>'] = cmp.mapping.scroll_docs(4),
---         ['<C-Space>'] = cmp.mapping.complete(),
---         ['<C-e>'] = cmp.mapping.abort(),
---         ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
---     }),
-
---     formatting = {
---         format = function(entry, vim_item)
---             -- Kind icons
---             vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
---             -- Source
---             vim_item.menu = ({
---                 buffer = "[Buffer]",
---                 nvim_lsp = "[LSP]",
---                 luasnip = "[LuaSnip]",
---                 nvim_lua = "[Lua]",
---                 latex_symbols = "[LaTeX]",
---             })[entry.source.name]
---             return vim_item
---         end
---     },
-
---     --- (Optional) Show source name in completion menu
---     -- formatting = cmp_format,
--- })

@@ -15,11 +15,5 @@ numlockx on
 setxkbmap -option caps:swapescape
 dwmblocks &
 st &
-# xcompmgr &
-# sleep 0.2
+caffeine &
 exec dbus-run-session -- dwm
-
-# xinput set-prop "Kensington ORBIT WIRELESS TB Mouse" "libinput Middle Emulation Enabled" 1 &
-# xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" .4 &
-# autorandr -c --skip-option crtc
-# ./Scripts/technobar/technobar.sh &

@@ -27,6 +27,10 @@ dwm*borderpx: 4
 dwm*gappih: 6
 dwm*gappiv: 6
 
+! Theme
+Xcursor.theme: Adwaita
+Xcursor.size: 24
+
 
 ! st appearance
 /* st*alpha: 0.60 */

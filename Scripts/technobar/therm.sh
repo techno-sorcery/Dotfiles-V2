@@ -12,7 +12,7 @@ icon1="🌡️"
 # fi
 
 # Fan
-fan="$(echo | awk '/fan1/ {print $2}' ~/.cache/techno_therm)"
+# fan="$(echo | awk '/fan1/ {print $2}' ~/.cache/techno_therm)"
 
 if [[ $fan == 0 ]] ; then
     icon2="󰠝"
@@ -21,4 +21,5 @@ else
 fi
 
 # Output
-echo $icon1 $temp°C, $fan RPM
+# echo $icon1 $temp°C, $fan RPM
+echo $icon1 $temp°C

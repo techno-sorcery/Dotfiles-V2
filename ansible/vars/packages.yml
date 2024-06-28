@@ -1,0 +1,63 @@
+base_cli_packages:
+    - ansible
+    - apt-file
+    - atool
+    - autoconf
+    - bc
+    - byacc
+    - curl
+    - default-jre
+    - ffmpeg
+    - fzf
+    - gcc
+    - git
+    - htop
+    - libtool
+    - libncurses-dev
+    - lm-sensors
+    - luajit
+    - make
+    - man
+    - ncal
+    - neovim
+    - network-manager
+    - p7zip-full
+    - pass
+    - pipx
+    - ssh
+    - stow
+    - sudo
+    - tmux
+    - tree
+    - unzip
+    - wget
+    - xclip
+    - zsh
+
+extra_cli_packages:
+    - cowsay
+    - fortune
+    - neofetch
+    - orpie
+    - wine
+
+  # Media
+    - mpc
+    - mpd
+    - ncmpcpp
+
+  # Development
+    - cppman
+    - gdb
+    - valgrind
+
+  # Documents
+    - gnuplot
+    - libxlsxwriter-dev
+    - pandoc
+    - texlive-full
+
+  # Dictionary
+    - dict-gcide
+    - dict-wn
+    - dictd

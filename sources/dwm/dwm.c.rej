@@ -1,20 +1,24 @@
 --- dwm.c
 +++ dwm.c
-@@ -207,6 +209,9 @@ static void setup(void);
- static void seturgent(Client *c, int urg);
- static void showhide(Client *c);
- static void sigchld(int unused);
-+#ifdef XINERAMA
-+static void sortscreens(XineramaScreenInfo *screens, int n);
-+#endif /* XINERAMA */
- static void spawn(const Arg *arg);
- static void tag(const Arg *arg);
- static void tagmon(const Arg *arg);
-@@ -1888,6 +1911,7 @@ updategeom(void)
- 				memcpy(&unique[j++], &info[i], sizeof(XineramaScreenInfo));
- 		XFree(info);
- 		nn = j;
-+		sortscreens(unique, nn);
- 		if (n <= nn) { /* new monitors available */
- 			for (i = 0; i < (nn - n); i++) {
- 				for (m = mons; m && m->next; m = m->next);
+@@ -276,21 +275,6 @@ static Window root, wmcheckwin;
+ struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
+ 
+ /* function implementations */
+-void
+-applydefaultlayouts()
+-{
+-    Monitor *m;
+-    int i = 0;
+-    for (m = mons; m; m = m->next) {
+-        if (i < LENGTH(lpm)) {
+-            m->lt[0] = &layouts[lpm[i]];
+-            m->lt[1] = &layouts[(lpm[i] + 1)/ % LENGTH(layouts)];
+-            strncpy(m->ltsymbol, layouts[i].symbol, sizeof m->ltsymbol);
+-        }
+-        i++;
+-    }
+-}
+-
+ void
+ applyrules(Client *c)
+ {
